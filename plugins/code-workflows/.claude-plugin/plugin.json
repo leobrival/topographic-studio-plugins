@@ -1,8 +1,14 @@
 {
   "name": "code-workflows",
   "version": "1.0.0",
-  "description": "Development workflow commands - EPCT methodology and production-ready logging setup",
+  "description": "Development workflow commands and skills - EPCT methodology, testing, CI/CD, monitoring, and documentation",
   "commands": ["./commands/*.md"],
+  "skills": [
+    "./skills/testing-suite/SKILL.md",
+    "./skills/ci-cd-pipelines/SKILL.md",
+    "./skills/monitoring-observability/SKILL.md",
+    "./skills/code-documentation/SKILL.md"
+  ],
   "author": {
     "name": "Leo Brival",
     "email": "leo.brival@gmail.com"

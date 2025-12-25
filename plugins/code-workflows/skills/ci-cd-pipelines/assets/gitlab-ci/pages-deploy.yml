@@ -1,0 +1,77 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  NODE_VERSION: "22"
+  PNPM_VERSION: "9"
+
+.node-base:
+  image: node:${NODE_VERSION}
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - .pnpm-store/
+  before_script:
+    - corepack enable
+    - corepack prepare pnpm@${PNPM_VERSION} --activate
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --frozen-lockfile
+
+build:
+  extends: .node-base
+  stage: build
+  script:
+    - pnpm build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 hour
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+pages:
+  stage: deploy
+  dependencies:
+    - build
+  script:
+    - mv dist public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  environment:
+    name: production
+    url: https://$CI_PROJECT_NAMESPACE.gitlab.io/$CI_PROJECT_NAME
+
+pages-review:
+  extends: .node-base
+  stage: deploy
+  script:
+    - pnpm build
+    - mv dist public
+  artifacts:
+    paths:
+      - public
+    expire_in: 1 week
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    url: https://$CI_PROJECT_NAMESPACE.gitlab.io/-/$CI_PROJECT_NAME/-/jobs/$CI_JOB_ID/artifacts/public/index.html
+    on_stop: stop-review
+    auto_stop_in: 1 week
+
+stop-review:
+  stage: deploy
+  script:
+    - echo "Stopping review environment"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    action: stop

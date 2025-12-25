@@ -1,0 +1,63 @@
+stages:
+  - lint
+  - test
+  - build
+
+variables:
+  NODE_VERSION: "22"
+  PNPM_VERSION: "9"
+
+.node-base:
+  image: node:${NODE_VERSION}
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - .pnpm-store/
+  before_script:
+    - corepack enable
+    - corepack prepare pnpm@${PNPM_VERSION} --activate
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --frozen-lockfile
+
+lint:
+  extends: .node-base
+  stage: lint
+  script:
+    - pnpm lint
+    - pnpm typecheck
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+test:
+  extends: .node-base
+  stage: test
+  parallel:
+    matrix:
+      - NODE_VERSION: ["20", "22"]
+  script:
+    - pnpm test --coverage
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
+  artifacts:
+    reports:
+      junit: junit.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+build:
+  extends: .node-base
+  stage: build
+  script:
+    - pnpm build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 week
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

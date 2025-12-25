@@ -1,0 +1,52 @@
+stages:
+  - test
+  - release
+
+variables:
+  NODE_VERSION: "22"
+  PNPM_VERSION: "9"
+
+.node-base:
+  image: node:${NODE_VERSION}
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - .pnpm-store/
+  before_script:
+    - corepack enable
+    - corepack prepare pnpm@${PNPM_VERSION} --activate
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --frozen-lockfile
+
+test:
+  extends: .node-base
+  stage: test
+  script:
+    - pnpm lint
+    - pnpm typecheck
+    - pnpm test
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+semantic-release:
+  extends: .node-base
+  stage: release
+  script:
+    - pnpm add -D semantic-release @semantic-release/gitlab @semantic-release/changelog @semantic-release/git
+    - npx semantic-release
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+release-cli:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  script:
+    - echo "Creating release for $CI_COMMIT_TAG"
+  release:
+    tag_name: $CI_COMMIT_TAG
+    name: "Release $CI_COMMIT_TAG"
+    description: "Release created from tag $CI_COMMIT_TAG"
+  rules:
+    - if: $CI_COMMIT_TAG
