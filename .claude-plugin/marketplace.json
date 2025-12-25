@@ -1,0 +1,11 @@
+{
+	"$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+	"name": "topographic-studio-plugins",
+	"version": "1.0.0",
+	"description": "Topographic Studio plugins for Claude Code",
+	"owner": {
+		"name": "Leo Brival",
+		"email": "leo.brival@gmail.com"
+	},
+	"plugins": []
+}
