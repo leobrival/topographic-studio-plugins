@@ -1,1 +1,0 @@
-/Users/leobrival/.claude/agents/ideabrowser/blog-strategist.md

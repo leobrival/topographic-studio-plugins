@@ -1,1 +1,0 @@
-/Users/leobrival/.claude/agents/ideabrowser/seo-content.md
