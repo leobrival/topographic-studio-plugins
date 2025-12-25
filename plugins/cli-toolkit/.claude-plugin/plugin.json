@@ -19,8 +19,7 @@
     "nextjs",
     "adonisjs",
     "raycast",
-    "coolify",
-    "things3"
+    "coolify"
   ],
   "dependencies": {
     "system": [

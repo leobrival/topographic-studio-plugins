@@ -1,166 +1,419 @@
 ---
-description: Tool selection priority guide - CLI over Bash over MCP for optimal performance and cost
+description: Comprehensive tool selection guide - CLI over Bash over MCP for optimal performance, cost, and reliability
 ---
 
 # Tool Selection Priority
 
-When choosing between CLI tools, Bash commands, and MCP servers, follow this priority order for optimal performance, cost, and reliability.
+**CRITICAL RULE:** Always prefer CLI over MCP unless explicitly requested otherwise.
 
-## Priority Order
+This guide defines the strict hierarchy for tool selection in Claude Code workflows.
+
+## The Golden Rule
 
 ```
-1. Native CLI tools (gh, docker, vercel, neonctl, railway, etc.)
-2. Bash commands and standard Unix tools
-3. MCP servers (only when necessary or explicitly requested)
+┌─────────────────────────────────────────────────────────┐
+│                    PRIORITY ORDER                        │
+├─────────────────────────────────────────────────────────┤
+│  1. Native CLI tools (gh, docker, vercel, neonctl...)   │
+│  2. Bash commands and Unix tools (curl, jq, grep...)    │
+│  3. MCP servers (ONLY when no alternative exists)       │
+└─────────────────────────────────────────────────────────┘
 ```
 
-## Why CLI First?
+## Why This Matters
 
-| Aspect | CLI | MCP |
-|--------|-----|-----|
-| **Latency** | Low - direct execution | Higher - API round-trips |
-| **Token cost** | None | Consumes tokens for communication |
-| **Reliability** | Direct execution | Depends on server availability |
-| **Flexibility** | Full command options | Limited to exposed tools |
-| **Offline** | Works offline | Requires connection |
-| **Error handling** | Native shell errors | Wrapped/transformed errors |
+### Performance Comparison
+
+| Metric | CLI | Bash | MCP |
+|--------|-----|------|-----|
+| Latency | ~10-100ms | ~10-50ms | ~500-2000ms |
+| Token cost | 0 | 0 | 50-1000+ tokens |
+| Reliability | 99.9% | 99.9% | 95-99% |
+| Offline capable | Yes | Yes | No |
+| Full options | Yes | Yes | Limited |
+| Error clarity | Native | Native | Wrapped |
+
+### Token Cost Analysis
+
+Every MCP call consumes tokens for:
+
+- Request serialization
+- Response parsing
+- Context maintenance
+- Error handling
+
+**Real-world token costs:**
+
+| Operation | CLI Cost | MCP Cost | Savings |
+|-----------|----------|----------|---------|
+| List GitHub issues | 0 | ~150 tokens | 100% |
+| Create PR | 0 | ~300 tokens | 100% |
+| Deploy to Vercel | 0 | ~500 tokens | 100% |
+| Docker build | 0 | ~400 tokens | 100% |
+| Database query | 0 | ~200 tokens | 100% |
+| 10 operations/session | 0 | ~3000 tokens | 100% |
+
+**Monthly impact (heavy usage):**
+
+- 50 sessions x 10 operations = 500 operations
+- MCP: ~150,000 tokens wasted
+- CLI: 0 tokens
 
 ## Decision Framework
 
-### Use Native CLI when:
+### Step 1: Check for Native CLI
 
-- A dedicated CLI tool exists for the service (gh, docker, vercel, railway, neonctl)
-- You need full control over command options and flags
-- Performance and speed are important
-- You want predictable, direct execution
-- Working offline or with limited connectivity
+```
+Task needed? → CLI exists? → Use CLI
+     ↓              ↓
+  GitHub       →   gh
+  Docker       →   docker
+  Vercel       →   vercel
+  Railway      →   railway
+  Neon         →   neonctl
+  Convex       →   npx convex
+  Playwright   →   npx playwright
+  Lighthouse   →   lighthouse
+  Next.js      →   next
+  AdonisJS     →   node ace
+  Coolify      →   coolify
+  Raycast      →   raycast
+```
 
-### Use Bash commands when:
+### Step 2: Check for Bash Alternative
 
-- No dedicated CLI exists
-- Simple file/system operations
-- Chaining multiple operations with pipes
-- Standard Unix tools suffice (curl, jq, grep, etc.)
-
-### Use MCP servers ONLY when:
-
-- User explicitly requests MCP usage
-- CLI alternative does not exist or is insufficient
-- MCP provides unique functionality not available via CLI
-- Browser automation required (Chrome DevTools MCP)
-- Real-time documentation lookup needed (Context7 MCP)
-
-## Examples
-
-### GitHub Operations
+If no dedicated CLI exists:
 
 ```bash
-# PREFERRED: Use gh CLI
+# HTTP requests
+curl -X GET https://api.example.com/data | jq .
+
+# File operations
+find . -name "*.ts" | xargs grep "pattern"
+
+# JSON processing
+cat config.json | jq '.key.nested'
+
+# Text processing
+awk, sed, grep, cut, sort, uniq
+
+# System info
+uname, df, ps, top, lsof
+```
+
+### Step 3: Use MCP Only If Required
+
+MCP is acceptable ONLY when:
+
+1. **User explicitly requests it**
+
+   ```
+   User: "Use the Notion MCP to create a page"
+   → OK to use MCP
+   ```
+
+2. **No CLI alternative exists**
+
+   ```
+   Figma design tokens → No CLI → Use Figma MCP
+   Notion databases → No CLI → Use Notion MCP
+   ```
+
+3. **MCP provides unique value**
+
+   ```
+   Chrome DevTools → Live browser interaction
+   Context7 → Real-time library docs
+   ```
+
+## Complete CLI Reference
+
+### GitHub CLI (`gh`)
+
+**Instead of GitHub API/MCP:**
+
+```bash
+# Authentication
+gh auth login
+gh auth status
+
+# Repositories
+gh repo create my-project
+gh repo clone owner/repo
+gh repo list --limit 10
+gh repo view --web
+
+# Issues
+gh issue create --title "Bug" --body "Description"
 gh issue list --assignee @me
-gh pr create --title "Fix bug" --body "Description"
-gh run list --status=failure
+gh issue view 123
+gh issue close 123 --comment "Fixed"
 
-# AVOID: Using MCP wrapper when CLI available
+# Pull Requests
+gh pr create --title "Feature" --body "Changes"
+gh pr list --state all
+gh pr checkout 123
+gh pr merge 123 --squash
+gh pr review 123 --approve
+
+# Actions
+gh run list --workflow=ci.yml
+gh run view 123456 --log
+gh run rerun 123456 --failed
+gh workflow run deploy.yml
+
+# Secrets
+gh secret set API_KEY
+gh secret list
+
+# Search
+gh search repos "machine learning" --language=python
+gh search issues "bug" --repo=owner/repo
 ```
 
-### Docker Operations
+### Docker CLI (`docker`)
+
+**Instead of Docker API:**
 
 ```bash
-# PREFERRED: Use docker CLI
+# Containers
+docker run -d -p 8080:80 nginx
 docker ps -a
+docker exec -it container_name bash
+docker logs -f container_name
+docker stop container_name
+docker rm container_name
+
+# Images
 docker build -t myapp:latest .
+docker images
+docker pull ubuntu:22.04
+docker push myregistry/myapp:v1
+docker rmi image_name
+
+# Compose
 docker compose up -d
+docker compose down
+docker compose logs -f
+docker compose exec service_name bash
 
-# AVOID: External API calls when local CLI works
+# System
+docker system df
+docker system prune -a
+docker stats
 ```
 
-### Database Operations
+### Vercel CLI (`vercel`)
+
+**Instead of Vercel API:**
 
 ```bash
-# PREFERRED: Use neonctl CLI
-neonctl branches list
-neonctl connection-string
+# Deployment
+vercel                    # Preview
+vercel --prod             # Production
+vercel --prebuilt
 
-# AVOID: MCP when CLI provides same functionality
+# Projects
+vercel project ls
+vercel link
+vercel env pull .env.local
+
+# Domains
+vercel domains ls
+vercel domains add example.com
+
+# Logs & Debug
+vercel logs
+vercel dev
+vercel inspect
 ```
 
-### Deployment
+### Railway CLI (`railway`)
+
+**Instead of Railway API:**
 
 ```bash
-# PREFERRED: Use platform CLI
-vercel --prod
+# Projects
+railway init
+railway link
+railway status
+
+# Deployment
 railway up
-coolify deploy
+railway logs
 
-# AVOID: API calls when CLI is more reliable
+# Services
+railway service
+railway variables
+
+# Database
+railway connect postgres
 ```
 
-## When MCP is Appropriate
+### Neon CLI (`neonctl`)
 
-### Browser Automation (Chrome DevTools MCP)
+**Instead of Neon API:**
+
+```bash
+# Projects
+neonctl projects list
+neonctl projects create --name mydb
+
+# Branches
+neonctl branches list
+neonctl branches create --name feature-branch
+
+# Connection
+neonctl connection-string
+neonctl connection-string --branch feature-branch
+
+# Databases
+neonctl databases list
+neonctl databases create --name mydb
+```
+
+### Other CLIs
+
+```bash
+# Convex
+npx convex dev
+npx convex deploy
+npx convex import
+npx convex export
+
+# Playwright
+npx playwright test
+npx playwright codegen
+npx playwright show-report
+
+# Lighthouse
+lighthouse https://example.com --output html
+lighthouse https://example.com --preset desktop
+
+# Next.js
+next dev
+next build
+next start
+next lint
+```
+
+## MCP Usage: Exceptions Only
+
+### Acceptable MCP Use Cases
+
+#### 1. Chrome DevTools MCP (Browser Automation)
+
+**Why:** No CLI can interact with live browser sessions.
 
 ```
-mcp__chrome-devtools__navigate_page
-mcp__chrome-devtools__take_screenshot
-mcp__chrome-devtools__click
+mcp__chrome-devtools__navigate_page     → Navigate to URL
+mcp__chrome-devtools__take_snapshot     → Get a11y tree
+mcp__chrome-devtools__take_screenshot   → Capture visual
+mcp__chrome-devtools__click             → Click element
+mcp__chrome-devtools__fill              → Fill input
+mcp__chrome-devtools__list_console_messages → Check errors
+mcp__chrome-devtools__list_network_requests → Verify API
 ```
 
-Use for: UI testing, visual verification, browser interactions
+**Use for:**
 
-### Documentation Lookup (Context7 MCP)
+- UI testing after implementation
+- Visual verification
+- Form interaction testing
+- Console error checking
+
+#### 2. Context7 MCP (Documentation)
+
+**Why:** Real-time library documentation lookup.
 
 ```
-mcp__context7__resolve-library-id
-mcp__context7__get-library-docs
+mcp__context7__resolve-library-id  → Find library ID
+mcp__context7__get-library-docs    → Get documentation
 ```
 
-Use for: Real-time library documentation, API references
+**Use for:**
 
-### External Service Integration
+- Looking up current API docs
+- Finding code examples
+- Checking library versions
 
-Use MCP when the service has no CLI but provides MCP server:
-- Notion MCP
-- Figma MCP
-- Custom internal MCPs
+#### 3. Service-Specific MCPs (No CLI Alternative)
 
-## Cost Analysis
+| MCP | Use Case | Why MCP |
+|-----|----------|---------|
+| Notion | Page/database operations | No official CLI |
+| Figma | Design token extraction | No official CLI |
+| Tally | Form management | No official CLI |
+| n8n | Workflow automation | API-first platform |
+| Hostinger | Hosting management | Proprietary API |
 
-| Operation | CLI Cost | MCP Cost |
-|-----------|----------|----------|
-| List repos | 0 tokens | ~100-500 tokens |
-| Create PR | 0 tokens | ~200-800 tokens |
-| Deploy | 0 tokens | ~300-1000 tokens |
-| Check status | 0 tokens | ~50-200 tokens |
+### Never Use MCP For
 
-**Rule of thumb**: Each MCP call costs tokens for request/response serialization. CLI calls are free.
+| Task | Wrong | Right |
+|------|-------|-------|
+| GitHub issues | GitHub MCP | `gh issue list` |
+| Docker containers | Docker MCP | `docker ps` |
+| Vercel deploy | Vercel MCP | `vercel --prod` |
+| Database queries | DB MCP | `neonctl` or `psql` |
+| File operations | Any MCP | `cat`, `grep`, `find` |
+| HTTP requests | Any MCP | `curl` |
 
-## Implementation Checklist
+## Workflow Examples
 
-Before using MCP, verify:
+### Example 1: Deploy New Feature
 
-- [ ] No native CLI exists for this operation
-- [ ] User explicitly requested MCP
-- [ ] MCP provides unique value over CLI
-- [ ] Performance impact is acceptable
-- [ ] Token cost is justified
+```bash
+# WRONG (MCP-heavy)
+1. Use GitHub MCP to create branch
+2. Use GitHub MCP to create PR
+3. Use Vercel MCP to deploy
+4. Use GitHub MCP to merge
 
-## Available CLI Tools
+# RIGHT (CLI-first)
+1. git checkout -b feature/new-thing
+2. git push -u origin feature/new-thing
+3. gh pr create --title "Add new feature"
+4. vercel --prod
+5. gh pr merge --squash
+```
 
-Use these CLI commands instead of MCP equivalents:
+### Example 2: Debug Production Issue
 
-| CLI | Command | Use Instead Of |
-|-----|---------|----------------|
-| GitHub | `gh` | GitHub API/MCP |
-| Docker | `docker` | Docker API |
-| Vercel | `vercel` | Vercel API |
-| Railway | `railway` | Railway API |
-| Neon | `neonctl` | Neon API |
-| Convex | `npx convex` | Convex API |
-| Playwright | `npx playwright` | Browser automation |
-| Lighthouse | `lighthouse` | Performance API |
-| Things 3 | AppleScript | Task management |
+```bash
+# WRONG
+1. Use Vercel MCP to get logs
+2. Use GitHub MCP to find related issues
 
-### CLI Reference Commands
+# RIGHT
+1. vercel logs --follow
+2. gh issue list --label bug
+3. gh run list --status=failure
+```
+
+### Example 3: Database Migration
+
+```bash
+# WRONG
+1. Use Neon MCP to create branch
+2. Use Neon MCP to run migration
+
+# RIGHT
+1. neonctl branches create --name migration-test
+2. neonctl connection-string --branch migration-test
+3. psql $CONNECTION_STRING -f migration.sql
+```
+
+### Example 4: UI Testing (MCP Acceptable)
+
+```bash
+# This is correct - no CLI alternative
+1. mcp__chrome-devtools__navigate_page → localhost:3000
+2. mcp__chrome-devtools__take_snapshot → Verify structure
+3. mcp__chrome-devtools__click → Test button
+4. mcp__chrome-devtools__list_console_messages → Check errors
+```
+
+## CLI Reference Commands
 
 Use these commands to get full CLI documentation:
 
@@ -173,39 +426,63 @@ Use these commands to get full CLI documentation:
 /convex-cli     # Convex CLI reference
 /playwright-cli # Playwright CLI reference
 /lighthouse-cli # Lighthouse CLI reference
+/nextjs-cli     # Next.js CLI reference
+/adonisjs-cli   # AdonisJS CLI reference
+/coolify-cli    # Coolify CLI reference
+/raycast-cli    # Raycast CLI reference
+/things3-cli    # Things 3 CLI reference
 ```
 
-## Configured MCP Servers
+## Quick Reference Card
 
-These MCPs provide unique functionality not available via CLI:
+### Always CLI
 
-| MCP | Purpose | When to Use |
-|-----|---------|-------------|
-| context7 | Library documentation | Real-time API docs lookup |
-| chrome-devtools | Browser automation | UI testing, screenshots |
-| hostinger-api | Hosting management | Hostinger-specific operations |
-| notion | Notion workspace | Note-taking, databases |
-| figma | Design system | Design token extraction |
-| n8n | Workflow automation | N8N workflow management |
-| tally | Form management | Tally forms |
+| Need | Command |
+|------|---------|
+| GitHub anything | `gh ...` |
+| Docker anything | `docker ...` |
+| Deploy Vercel | `vercel --prod` |
+| Deploy Railway | `railway up` |
+| Database Neon | `neonctl ...` |
+| HTTP request | `curl ...` |
+| JSON process | `jq ...` |
+| File search | `find ...` / `grep ...` |
+
+### MCP Exceptions
+
+| Need | MCP |
+|------|-----|
+| Browser testing | chrome-devtools |
+| Live docs lookup | context7 |
+| Notion operations | notion |
+| Figma tokens | figma |
+| n8n workflows | n8n |
+
+## Enforcement Checklist
+
+Before every tool choice:
+
+- [ ] Is there a native CLI for this? → Use CLI
+- [ ] Can Bash/curl/jq do this? → Use Bash
+- [ ] Did user explicitly request MCP? → OK to use MCP
+- [ ] Does MCP provide unique value? → OK to use MCP
+- [ ] Is this browser automation? → Use Chrome DevTools MCP
+- [ ] Is this live docs lookup? → Use Context7 MCP
 
 ## Summary
 
 ```
-CLI > Bash > MCP
+┌────────────────────────────────────────┐
+│           TOOL PRIORITY                │
+├────────────────────────────────────────┤
+│  CLI  →  Always first choice           │
+│  Bash →  When no dedicated CLI         │
+│  MCP  →  Only for browser/docs/no-CLI  │
+└────────────────────────────────────────┘
 
-Use CLI first. Always.
-Use Bash for glue operations.
-Use MCP only when no alternative exists.
-```
+Cost:     CLI = 0    |  MCP = expensive
+Speed:    CLI = fast |  MCP = slow
+Reliable: CLI = yes  |  MCP = depends
 
-## Quick Decision
-
-```
-Need GitHub operation? → gh CLI
-Need Docker operation? → docker CLI
-Need deployment? → vercel/railway CLI
-Need database? → neonctl CLI
-Need browser test? → Chrome DevTools MCP (exception)
-Need live docs? → Context7 MCP (exception)
+When in doubt, use CLI.
 ```
