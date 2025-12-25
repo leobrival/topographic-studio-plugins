@@ -1,0 +1,104 @@
+{
+  "name": "cli-toolkit",
+  "version": "1.0.0",
+  "description": "CLI reference commands for popular development tools - GitHub, Docker, Vercel, Railway, and more",
+  "commands": ["commands/*.md"],
+  "author": "leobrival",
+  "license": "MIT",
+  "keywords": [
+    "cli",
+    "github",
+    "docker",
+    "vercel",
+    "railway",
+    "neon",
+    "convex",
+    "playwright",
+    "lighthouse",
+    "nextjs",
+    "adonisjs",
+    "raycast",
+    "coolify",
+    "things3"
+  ],
+  "dependencies": {
+    "system": [
+      {
+        "name": "gh",
+        "command": "gh",
+        "optional": true,
+        "install": {
+          "macos": "brew install gh",
+          "linux": "sudo apt install gh",
+          "windows": "winget install GitHub.cli"
+        },
+        "description": "GitHub CLI for repository, issue, and PR management"
+      },
+      {
+        "name": "docker",
+        "command": "docker",
+        "optional": true,
+        "install": {
+          "macos": "brew install --cask docker",
+          "linux": "sudo apt install docker.io",
+          "windows": "winget install Docker.DockerDesktop"
+        },
+        "description": "Container runtime for building and running applications"
+      },
+      {
+        "name": "vercel",
+        "command": "vercel",
+        "optional": true,
+        "install": {
+          "all": "npm install -g vercel"
+        },
+        "description": "Vercel CLI for serverless deployments"
+      },
+      {
+        "name": "railway",
+        "command": "railway",
+        "optional": true,
+        "install": {
+          "all": "npm install -g @railway/cli"
+        },
+        "description": "Railway CLI for cloud deployments"
+      },
+      {
+        "name": "neon",
+        "command": "neonctl",
+        "optional": true,
+        "install": {
+          "all": "npm install -g neonctl"
+        },
+        "description": "Neon CLI for serverless Postgres management"
+      },
+      {
+        "name": "convex",
+        "command": "npx convex",
+        "optional": true,
+        "install": {
+          "all": "npm install convex"
+        },
+        "description": "Convex CLI for backend-as-a-service"
+      },
+      {
+        "name": "playwright",
+        "command": "npx playwright",
+        "optional": true,
+        "install": {
+          "all": "npm install -D @playwright/test"
+        },
+        "description": "Playwright for browser automation and testing"
+      },
+      {
+        "name": "lighthouse",
+        "command": "lighthouse",
+        "optional": true,
+        "install": {
+          "all": "npm install -g lighthouse"
+        },
+        "description": "Lighthouse for web performance auditing"
+      }
+    ]
+  }
+}

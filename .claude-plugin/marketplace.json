@@ -73,6 +73,17 @@
 			},
 			"source": "./plugins/speckit",
 			"category": "development"
+		},
+		{
+			"name": "cli-toolkit",
+			"description": "CLI reference commands for popular development tools - GitHub, Docker, Vercel, Railway, and more",
+			"version": "1.0.0",
+			"author": {
+				"name": "Leo Brival",
+				"email": "leo.brival@gmail.com"
+			},
+			"source": "./plugins/cli-toolkit",
+			"category": "productivity"
 		}
 	]
 }
