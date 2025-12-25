@@ -1,0 +1,9 @@
+{
+	"name": "security-hooks",
+	"description": "Security validation hooks for Claude Code with command validation, linting and type checking",
+	"version": "1.0.0",
+	"author": {
+		"name": "Leo Brival",
+		"email": "leo.brival@gmail.com"
+	}
+}

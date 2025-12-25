@@ -1,0 +1,9 @@
+{
+	"name": "hookify",
+	"version": "1.0.0",
+	"description": "Enhanced hookify with 24 pre-configured security rules. Uses Bun runtime - no Python required.",
+	"author": {
+		"name": "Leo Brival",
+		"email": "leo.brival@gmail.com"
+	}
+}

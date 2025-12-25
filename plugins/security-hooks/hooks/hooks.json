@@ -1,0 +1,42 @@
+{
+	"description": "Serum plugin hooks for validation and processing",
+	"hooks": {
+		"PreToolUse": [
+			{
+				"matcher": "Bash",
+				"description": "Validate commands before execution",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "${CLAUDE_PLUGIN_ROOT}/scripts/validate-commands.js",
+						"timeout": 30
+					}
+				]
+			}
+		],
+		"PostToolUse": [
+			{
+				"matcher": "Write|Edit",
+				"description": "Lint check after file modifications",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "${CLAUDE_PLUGIN_ROOT}/scripts/lint-check.js",
+						"timeout": 30
+					}
+				]
+			},
+			{
+				"matcher": "Write|Edit",
+				"description": "Type check TypeScript files",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "${CLAUDE_PLUGIN_ROOT}/scripts/type-check.js",
+						"timeout": 30
+					}
+				]
+			}
+		]
+	}
+}

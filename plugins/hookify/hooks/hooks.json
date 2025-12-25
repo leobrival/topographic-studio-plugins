@@ -1,0 +1,49 @@
+{
+	"description": "Hookify plugin - User-configurable hooks from .local.md files (Bun runtime)",
+	"hooks": {
+		"PreToolUse": [
+			{
+				"hooks": [
+					{
+						"type": "command",
+						"command": "bun ${CLAUDE_PLUGIN_ROOT}/hooks/pretooluse.ts",
+						"timeout": 10
+					}
+				]
+			}
+		],
+		"PostToolUse": [
+			{
+				"hooks": [
+					{
+						"type": "command",
+						"command": "bun ${CLAUDE_PLUGIN_ROOT}/hooks/posttooluse.ts",
+						"timeout": 10
+					}
+				]
+			}
+		],
+		"Stop": [
+			{
+				"hooks": [
+					{
+						"type": "command",
+						"command": "bun ${CLAUDE_PLUGIN_ROOT}/hooks/stop.ts",
+						"timeout": 10
+					}
+				]
+			}
+		],
+		"UserPromptSubmit": [
+			{
+				"hooks": [
+					{
+						"type": "command",
+						"command": "bun ${CLAUDE_PLUGIN_ROOT}/hooks/userpromptsubmit.ts",
+						"timeout": 10
+					}
+				]
+			}
+		]
+	}
+}
