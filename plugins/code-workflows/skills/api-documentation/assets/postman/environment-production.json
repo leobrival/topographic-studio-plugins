@@ -1,0 +1,43 @@
+{
+  "id": "{{$guid}}",
+  "name": "{{API_NAME}} - Production",
+  "values": [
+    {
+      "key": "BASE_URL",
+      "value": "https://api.example.com/v1",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "API_KEY",
+      "value": "",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "CLIENT_ID",
+      "value": "",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "CLIENT_SECRET",
+      "value": "",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "REFRESH_TOKEN",
+      "value": "",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "ACCESS_TOKEN",
+      "value": "",
+      "type": "secret",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment"
+}

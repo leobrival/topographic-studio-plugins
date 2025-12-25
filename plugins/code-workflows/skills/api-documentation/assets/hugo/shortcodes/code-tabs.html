@@ -1,0 +1,119 @@
+{{/* Code Tabs Shortcode */}}
+{{/* Usage:
+{{< code-tabs >}}
+{{< tab name="cURL" >}}
+curl -X GET https://api.example.com/users
+{{< /tab >}}
+{{< tab name="JavaScript" >}}
+fetch('https://api.example.com/users')
+{{< /tab >}}
+{{< /code-tabs >}}
+*/}}
+
+{{ $id := .Get "id" | default (printf "tabs-%d" (now.UnixNano)) }}
+
+<div class="code-tabs" id="{{ $id }}">
+  <div class="tab-headers" role="tablist">
+    {{ $tabs := split .Inner "<!-- tab-separator -->" }}
+    {{ range $index, $tab := $tabs }}
+      {{ if $tab }}
+        {{ $name := index (findRE `data-tab-name="([^"]+)"` $tab) 0 }}
+        {{ $tabName := replaceRE `data-tab-name="([^"]+)"` "$1" $name }}
+        <button
+          class="tab-header {{ if eq $index 0 }}active{{ end }}"
+          role="tab"
+          aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}"
+          data-tab="{{ $index }}"
+        >
+          {{ $tabName }}
+        </button>
+      {{ end }}
+    {{ end }}
+  </div>
+  <div class="tab-panels">
+    {{ .Inner }}
+  </div>
+</div>
+
+<style>
+.code-tabs {
+  border: 1px solid var(--border-color, #e1e4e8);
+  border-radius: 6px;
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+.tab-headers {
+  display: flex;
+  background: var(--header-bg, #f6f8fa);
+  border-bottom: 1px solid var(--border-color, #e1e4e8);
+  overflow-x: auto;
+}
+
+.tab-header {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-muted, #666);
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.tab-header:hover {
+  color: var(--text-color, #333);
+  background: var(--hover-bg, rgba(0,0,0,0.05));
+}
+
+.tab-header.active {
+  color: var(--primary-color, #0969da);
+  border-bottom-color: var(--primary-color, #0969da);
+}
+
+.tab-panels {
+  position: relative;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.tab-panel pre {
+  margin: 0;
+  border-radius: 0;
+}
+</style>
+
+<script>
+(function() {
+  const container = document.getElementById('{{ $id }}');
+  if (!container) return;
+
+  const headers = container.querySelectorAll('.tab-header');
+  const panels = container.querySelectorAll('.tab-panel');
+
+  headers.forEach((header, index) => {
+    header.addEventListener('click', () => {
+      headers.forEach(h => {
+        h.classList.remove('active');
+        h.setAttribute('aria-selected', 'false');
+      });
+      panels.forEach(p => p.classList.remove('active'));
+
+      header.classList.add('active');
+      header.setAttribute('aria-selected', 'true');
+      if (panels[index]) {
+        panels[index].classList.add('active');
+      }
+    });
+  });
+
+  // Activate first panel
+  if (panels[0]) panels[0].classList.add('active');
+})();
+</script>

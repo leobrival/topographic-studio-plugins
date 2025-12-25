@@ -1,0 +1,125 @@
+# Hugo Configuration for API Documentation
+# Optimized for Doks theme - adjust for other themes
+
+baseURL = "https://docs.example.com/"
+title = "API Documentation"
+languageCode = "en-us"
+defaultContentLanguage = "en"
+
+# Theme
+theme = "doks"
+
+# Enable features
+enableGitInfo = true
+enableRobotsTXT = true
+
+# Syntax highlighting
+pygmentsUseClasses = true
+pygmentsCodefences = true
+
+# Outputs
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+  page = ["HTML"]
+
+# Sitemap
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+# Markup settings
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "dracula"
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = false
+  [markup.tableOfContents]
+    endLevel = 4
+    ordered = false
+    startLevel = 2
+
+# Menu
+[menu]
+  [[menu.main]]
+    identifier = "getting-started"
+    name = "Getting Started"
+    url = "/getting-started/"
+    weight = 10
+  [[menu.main]]
+    identifier = "api-reference"
+    name = "API Reference"
+    url = "/api-reference/"
+    weight = 20
+  [[menu.main]]
+    identifier = "guides"
+    name = "Guides"
+    url = "/guides/"
+    weight = 30
+  [[menu.main]]
+    identifier = "sdks"
+    name = "SDKs"
+    url = "/sdks/"
+    weight = 40
+
+# Params
+[params]
+  # Meta
+  title = "API Documentation"
+  description = "Complete API reference and developer guides"
+  images = ["og-image.png"]
+
+  # API Info
+  apiVersion = "v1"
+  apiBaseUrl = "https://api.example.com"
+
+  # Repository
+  docsRepo = "https://github.com/example/api-docs"
+  editPage = true
+
+  # Features
+  search = true
+  darkMode = true
+  flexSearch = true
+
+  # Footer
+  footer = "Built with Hugo and Doks"
+
+  # Code tabs
+  [params.code]
+    copy = true
+    maxShownLines = 50
+
+# Privacy
+[privacy]
+  [privacy.googleAnalytics]
+    disable = true
+
+# Languages (optional multi-language)
+[languages]
+  [languages.en]
+    languageName = "English"
+    weight = 1
+  # [languages.fr]
+  #   languageName = "Français"
+  #   weight = 2
+
+# Module mounts (for themes with npm dependencies)
+[module]
+  [[module.mounts]]
+    source = "content"
+    target = "content"
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"

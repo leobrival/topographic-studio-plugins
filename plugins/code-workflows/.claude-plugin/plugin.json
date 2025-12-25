@@ -1,13 +1,27 @@
 {
   "name": "code-workflows",
   "version": "1.0.0",
-  "description": "Development workflow commands and skills - EPCT methodology, testing, CI/CD, monitoring, and documentation",
+  "description": "Development workflow commands and skills - EPCT methodology, testing, CI/CD, monitoring, APIs, databases, and documentation",
   "commands": ["./commands/*.md"],
   "skills": [
-    "./skills/testing-suite/SKILL.md",
+    "./skills/api-client-generator/SKILL.md",
+    "./skills/api-documentation/SKILL.md",
+    "./skills/chrome-extension/SKILL.md",
     "./skills/ci-cd-pipelines/SKILL.md",
+    "./skills/cli-builder/SKILL.md",
+    "./skills/code-documentation/SKILL.md",
+    "./skills/database-designer/SKILL.md",
+    "./skills/document-skills/docx/SKILL.md",
+    "./skills/document-skills/pdf/SKILL.md",
+    "./skills/document-skills/pptx/SKILL.md",
+    "./skills/document-skills/xlsx/SKILL.md",
+    "./skills/github-rules/SKILL.md",
+    "./skills/mcp-builder/SKILL.md",
     "./skills/monitoring-observability/SKILL.md",
-    "./skills/code-documentation/SKILL.md"
+    "./skills/skill-creator/SKILL.md",
+    "./skills/state-management/SKILL.md",
+    "./skills/testing-suite/SKILL.md",
+    "./skills/webapp-testing/SKILL.md"
   ],
   "author": {
     "name": "Leo Brival",

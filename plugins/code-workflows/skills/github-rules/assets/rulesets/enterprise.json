@@ -1,0 +1,58 @@
+{
+  "name": "Enterprise Protection",
+  "target": "branch",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": {
+      "include": ["~DEFAULT_BRANCH", "refs/heads/release/*"],
+      "exclude": []
+    }
+  },
+  "rules": [
+    {
+      "type": "pull_request",
+      "parameters": {
+        "required_approving_review_count": 2,
+        "dismiss_stale_reviews_on_push": true,
+        "require_code_owner_review": true,
+        "require_last_push_approval": true,
+        "required_review_thread_resolution": true
+      }
+    },
+    {
+      "type": "required_status_checks",
+      "parameters": {
+        "required_status_checks": [
+          {"context": "lint", "integration_id": null},
+          {"context": "typecheck", "integration_id": null},
+          {"context": "unit-tests", "integration_id": null},
+          {"context": "integration-tests", "integration_id": null},
+          {"context": "e2e-tests", "integration_id": null},
+          {"context": "build", "integration_id": null},
+          {"context": "security-scan", "integration_id": null},
+          {"context": "license-check", "integration_id": null}
+        ],
+        "strict_required_status_checks_policy": true
+      }
+    },
+    {
+      "type": "required_signatures"
+    },
+    {
+      "type": "required_linear_history"
+    },
+    {
+      "type": "non_fast_forward"
+    },
+    {
+      "type": "deletion"
+    },
+    {
+      "type": "required_deployments",
+      "parameters": {
+        "required_deployment_environments": ["staging"]
+      }
+    }
+  ],
+  "bypass_actors": []
+}

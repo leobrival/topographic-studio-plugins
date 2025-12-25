@@ -1,0 +1,86 @@
+{{/* Parameter Table Shortcode */}}
+{{/* Usage:
+{{< param-table >}}
+{{< param name="id" type="string" required="true" >}}
+The unique identifier for the user.
+{{< /param >}}
+{{< param name="email" type="string" required="false" >}}
+User email address.
+{{< /param >}}
+{{< /param-table >}}
+*/}}
+
+<div class="param-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ .Inner }}
+    </tbody>
+  </table>
+</div>
+
+<style>
+.param-table {
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.param-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.param-table th,
+.param-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color, #e1e4e8);
+}
+
+.param-table th {
+  background: var(--header-bg, #f6f8fa);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--text-muted, #666);
+}
+
+.param-table tr:hover {
+  background: var(--hover-bg, rgba(0,0,0,0.02));
+}
+
+.param-name {
+  font-family: var(--mono-font, monospace);
+  font-weight: 500;
+}
+
+.param-type {
+  font-family: var(--mono-font, monospace);
+  font-size: 0.85rem;
+  color: var(--type-color, #6f42c1);
+}
+
+.param-required {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+}
+
+.param-required.yes {
+  background: var(--danger-bg, #ffebe9);
+  color: var(--danger-color, #cf222e);
+}
+
+.param-required.no {
+  background: var(--muted-bg, #f0f0f0);
+  color: var(--muted-color, #666);
+}
+</style>

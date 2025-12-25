@@ -1,0 +1,95 @@
+{{/* API Endpoint Shortcode */}}
+{{/* Usage: {{< api-endpoint method="GET" path="/users/{id}" >}} */}}
+
+{{ $method := .Get "method" | default "GET" }}
+{{ $path := .Get "path" }}
+{{ $auth := .Get "auth" | default "required" }}
+{{ $deprecated := .Get "deprecated" | default false }}
+
+<div class="api-endpoint {{ if $deprecated }}deprecated{{ end }}">
+  <div class="endpoint-header">
+    <span class="method method-{{ lower $method }}">{{ upper $method }}</span>
+    <code class="path">{{ $path }}</code>
+    {{ if eq $auth "required" }}
+    <span class="auth-badge">Auth Required</span>
+    {{ else if eq $auth "optional" }}
+    <span class="auth-badge auth-optional">Auth Optional</span>
+    {{ end }}
+    {{ if $deprecated }}
+    <span class="deprecated-badge">Deprecated</span>
+    {{ end }}
+  </div>
+  <div class="endpoint-content">
+    {{ .Inner }}
+  </div>
+</div>
+
+<style>
+.api-endpoint {
+  border: 1px solid var(--border-color, #e1e4e8);
+  border-radius: 6px;
+  margin: 1.5rem 0;
+  overflow: hidden;
+}
+
+.api-endpoint.deprecated {
+  opacity: 0.7;
+  border-color: var(--warning-color, #f0ad4e);
+}
+
+.endpoint-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--header-bg, #f6f8fa);
+  border-bottom: 1px solid var(--border-color, #e1e4e8);
+  flex-wrap: wrap;
+}
+
+.method {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.method-get { background: #61affe; color: white; }
+.method-post { background: #49cc90; color: white; }
+.method-put { background: #fca130; color: white; }
+.method-patch { background: #50e3c2; color: white; }
+.method-delete { background: #f93e3e; color: white; }
+
+.path {
+  font-family: var(--mono-font, monospace);
+  font-size: 0.9rem;
+  flex-grow: 1;
+}
+
+.auth-badge, .deprecated-badge {
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.auth-badge {
+  background: var(--info-bg, #e7f3ff);
+  color: var(--info-color, #0969da);
+}
+
+.auth-badge.auth-optional {
+  background: var(--muted-bg, #f0f0f0);
+  color: var(--muted-color, #666);
+}
+
+.deprecated-badge {
+  background: var(--warning-bg, #fff8e6);
+  color: var(--warning-color, #9a6700);
+}
+
+.endpoint-content {
+  padding: 1rem;
+}
+</style>

@@ -1,0 +1,95 @@
+{{/* Response Example Shortcode */}}
+{{/* Usage:
+{{< response-example status="200" description="Success" >}}
+{
+  "id": "user_123",
+  "email": "user@example.com"
+}
+{{< /response-example >}}
+*/}}
+
+{{ $status := .Get "status" | default "200" }}
+{{ $description := .Get "description" | default "" }}
+{{ $contentType := .Get "content-type" | default "application/json" }}
+
+{{ $statusClass := "success" }}
+{{ if ge (int $status) 400 }}
+  {{ $statusClass = "error" }}
+{{ else if ge (int $status) 300 }}
+  {{ $statusClass = "redirect" }}
+{{ end }}
+
+<div class="response-example">
+  <div class="response-header">
+    <span class="status-code status-{{ $statusClass }}">{{ $status }}</span>
+    {{ if $description }}
+    <span class="status-description">{{ $description }}</span>
+    {{ end }}
+    <span class="content-type">{{ $contentType }}</span>
+  </div>
+  <div class="response-body">
+    <pre><code class="language-json">{{ .Inner | htmlUnescape }}</code></pre>
+  </div>
+</div>
+
+<style>
+.response-example {
+  border: 1px solid var(--border-color, #e1e4e8);
+  border-radius: 6px;
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+.response-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: var(--header-bg, #f6f8fa);
+  border-bottom: 1px solid var(--border-color, #e1e4e8);
+}
+
+.status-code {
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  font-family: var(--mono-font, monospace);
+}
+
+.status-success {
+  background: var(--success-bg, #dafbe1);
+  color: var(--success-color, #1a7f37);
+}
+
+.status-error {
+  background: var(--danger-bg, #ffebe9);
+  color: var(--danger-color, #cf222e);
+}
+
+.status-redirect {
+  background: var(--warning-bg, #fff8e6);
+  color: var(--warning-color, #9a6700);
+}
+
+.status-description {
+  font-size: 0.85rem;
+  color: var(--text-muted, #666);
+}
+
+.content-type {
+  margin-left: auto;
+  font-size: 0.75rem;
+  font-family: var(--mono-font, monospace);
+  color: var(--text-muted, #888);
+}
+
+.response-body pre {
+  margin: 0;
+  border-radius: 0;
+}
+
+.response-body code {
+  font-size: 0.85rem;
+}
+</style>

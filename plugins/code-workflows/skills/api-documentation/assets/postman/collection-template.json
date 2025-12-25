@@ -1,0 +1,345 @@
+{
+  "info": {
+    "_postman_id": "{{$guid}}",
+    "name": "{{API_NAME}} API",
+    "description": "{{API_DESCRIPTION}}\n\n## Authentication\n\nThis API uses Bearer token authentication. Include your API key in the Authorization header:\n\n```\nAuthorization: Bearer YOUR_API_KEY\n```\n\n## Base URL\n\n```\n{{BASE_URL}}\n```\n\n## Rate Limits\n\n- 100 requests per minute for free tier\n- 1000 requests per minute for paid tier\n\n## Support\n\nFor issues, contact support@example.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{API_KEY}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "https://api.example.com/v1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "description": "Endpoints for authentication and token management.",
+      "item": [
+        {
+          "name": "Get Access Token",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": \"{{CLIENT_ID}}\",\n  \"client_secret\": \"{{CLIENT_SECRET}}\",\n  \"grant_type\": \"client_credentials\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/token",
+              "host": ["{{BASE_URL}}"],
+              "path": ["auth", "token"]
+            },
+            "description": "Exchange client credentials for an access token.\n\n**Response:**\n- `access_token`: JWT token for API authentication\n- `expires_in`: Token validity in seconds\n- `token_type`: Always \"Bearer\""
+          },
+          "response": [
+            {
+              "name": "Success",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"expires_in\": 3600,\n  \"token_type\": \"Bearer\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refresh_token\": \"{{REFRESH_TOKEN}}\",\n  \"grant_type\": \"refresh_token\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/refresh",
+              "host": ["{{BASE_URL}}"],
+              "path": ["auth", "refresh"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "description": "User management endpoints.",
+      "item": [
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/users?page=1&limit=20",
+              "host": ["{{BASE_URL}}"],
+              "path": ["users"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (default: 1)"
+                },
+                {
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Items per page (max: 100)"
+                },
+                {
+                  "key": "sort",
+                  "value": "created_at",
+                  "description": "Sort field",
+                  "disabled": true
+                },
+                {
+                  "key": "order",
+                  "value": "desc",
+                  "description": "Sort order (asc/desc)",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Retrieve a paginated list of users.\n\n**Pagination:**\n- Use `page` and `limit` query parameters\n- Response includes `total`, `page`, `limit`, and `pages` metadata"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"user_123\",\n      \"email\": \"user@example.com\",\n      \"name\": \"John Doe\",\n      \"created_at\": \"2024-01-15T10:30:00Z\"\n    }\n  ],\n  \"meta\": {\n    \"total\": 150,\n    \"page\": 1,\n    \"limit\": 20,\n    \"pages\": 8\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/users/:userId",
+              "host": ["{{BASE_URL}}"],
+              "path": ["users", ":userId"],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "user_123",
+                  "description": "User ID"
+                }
+              ]
+            },
+            "description": "Retrieve a single user by ID."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"id\": \"user_123\",\n  \"email\": \"user@example.com\",\n  \"name\": \"John Doe\",\n  \"created_at\": \"2024-01-15T10:30:00Z\",\n  \"updated_at\": \"2024-01-20T14:45:00Z\"\n}"
+            },
+            {
+              "name": "Not Found",
+              "status": "Not Found",
+              "code": 404,
+              "body": "{\n  \"error\": {\n    \"code\": \"NOT_FOUND\",\n    \"message\": \"User not found\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newuser@example.com\",\n  \"name\": \"Jane Doe\",\n  \"password\": \"securePassword123\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/users",
+              "host": ["{{BASE_URL}}"],
+              "path": ["users"]
+            },
+            "description": "Create a new user.\n\n**Required fields:**\n- `email`: Valid email address (unique)\n- `name`: User's display name\n- `password`: Min 8 characters"
+          },
+          "response": [
+            {
+              "name": "Created",
+              "status": "Created",
+              "code": 201,
+              "body": "{\n  \"id\": \"user_456\",\n  \"email\": \"newuser@example.com\",\n  \"name\": \"Jane Doe\",\n  \"created_at\": \"2024-01-25T09:15:00Z\"\n}"
+            },
+            {
+              "name": "Validation Error",
+              "status": "Unprocessable Entity",
+              "code": 422,
+              "body": "{\n  \"error\": {\n    \"code\": \"VALIDATION_ERROR\",\n    \"message\": \"Validation failed\",\n    \"details\": [\n      {\n        \"field\": \"email\",\n        \"message\": \"Email already exists\"\n      }\n    ]\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Updated\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/users/:userId",
+              "host": ["{{BASE_URL}}"],
+              "path": ["users", ":userId"],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "user_123"
+                }
+              ]
+            },
+            "description": "Update an existing user. Only provided fields will be updated."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/users/:userId",
+              "host": ["{{BASE_URL}}"],
+              "path": ["users", ":userId"],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "user_123"
+                }
+              ]
+            },
+            "description": "Delete a user. This action is irreversible."
+          },
+          "response": [
+            {
+              "name": "No Content",
+              "status": "No Content",
+              "code": 204,
+              "body": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Resources",
+      "description": "Generic resource CRUD operations.",
+      "item": [
+        {
+          "name": "List Resources",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/resources",
+              "host": ["{{BASE_URL}}"],
+              "path": ["resources"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Resource",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/resources/:resourceId",
+              "host": ["{{BASE_URL}}"],
+              "path": ["resources", ":resourceId"],
+              "variable": [
+                {
+                  "key": "resourceId",
+                  "value": "res_123"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Add timestamp to requests",
+          "pm.variables.set('timestamp', new Date().toISOString());",
+          "",
+          "// Log request details",
+          "console.log('Request:', pm.request.method, pm.request.url.toString());"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Common tests for all requests",
+          "",
+          "// Check response time",
+          "pm.test('Response time is acceptable', function() {",
+          "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+          "});",
+          "",
+          "// Check for error responses",
+          "if (pm.response.code >= 400) {",
+          "    pm.test('Error response has expected format', function() {",
+          "        const json = pm.response.json();",
+          "        pm.expect(json).to.have.property('error');",
+          "        pm.expect(json.error).to.have.property('code');",
+          "        pm.expect(json.error).to.have.property('message');",
+          "    });",
+          "}"
+        ]
+      }
+    }
+  ]
+}
