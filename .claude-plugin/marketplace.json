@@ -62,6 +62,17 @@
 			},
 			"source": "./plugins/hookify",
 			"category": "security"
+		},
+		{
+			"name": "speckit",
+			"description": "Spec-kit CLI manager - install, update, version check, and project initialization",
+			"version": "1.0.0",
+			"author": {
+				"name": "Leo Brival",
+				"email": "leo.brival@gmail.com"
+			},
+			"source": "./plugins/speckit",
+			"category": "development"
 		}
 	]
 }

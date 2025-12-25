@@ -6,8 +6,8 @@ pattern: \.\.\/
 action: warn
 ---
 
-**Traversée de chemin détectée**
+**Path traversal detected**
 
-Les séquences `../` peuvent être utilisées pour accéder à des répertoires parents non autorisés.
+Sequences `../` can be used to access unauthorized parent directories.
 
-Vérifiez que le chemin cible est bien celui attendu.
+Verify that the target path is the expected one.

@@ -21,6 +21,12 @@ Topographic Studio plugins for Claude Code - crawling, product strategy, and tec
 
 # Install technical engineering agents
 /plugin install roadmap@topographic-studio-plugins
+
+# Install security hooks (Bun runtime)
+/plugin install hookify@topographic-studio-plugins
+
+# Install spec-kit CLI manager
+/plugin install speckit@topographic-studio-plugins
 ```
 
 ### Verify installation
@@ -59,6 +65,32 @@ Technical engineering agents for software development and architecture.
 - DevOps, cloud, data engineering
 - AI/ML, prompt engineering
 
+### hookify
+
+Enhanced hookify with **24 pre-configured security rules** - Bun runtime, no Python required.
+
+- 20 Bash security rules (block/warn dangerous commands)
+- 4 File editing rules (secrets detection, debug code)
+- Commands: `/hookify`, `/hookify:list`, `/hookify:configure`
+
+### speckit
+
+Complete lifecycle management for [spec-kit](https://github.com/github/spec-kit) - spec-driven development.
+
+- Install spec-kit CLI with prerequisites check
+- Update to latest version
+- Version comparison (installed vs latest)
+- Project initialization with AI agent selection
+
+**Usage:**
+
+```bash
+/speckit           # Check version
+/speckit install   # Install spec-kit
+/speckit update    # Update to latest
+/speckit init      # Initialize project
+```
+
 ## File Structure
 
 ```
@@ -68,7 +100,10 @@ topographic-studio-plugins/
 ├── plugins/
 │   ├── crawler/
 │   ├── ideabrowser/
-│   └── roadmap/
+│   ├── roadmap/
+│   ├── hookify/
+│   ├── security-hooks/
+│   └── speckit/
 └── README.md
 ```
 

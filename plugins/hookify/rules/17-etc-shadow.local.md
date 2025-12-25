@@ -6,8 +6,8 @@ pattern: \/etc\/shadow
 action: block
 ---
 
-**Accès au fichier shadow bloqué**
+**Shadow file access blocked**
 
-Le fichier `/etc/shadow` contient les mots de passe hashés du système.
+The `/etc/shadow` file contains hashed system passwords.
 
-Cet accès est strictement interdit pour des raisons de sécurité.
+This access is strictly forbidden for security reasons.

@@ -10,8 +10,8 @@ conditions:
 action: warn
 ---
 
-**Statement debugger détecté**
+**Debugger statement detected**
 
-Le mot-clé `debugger` ne doit pas être présent en production.
+The `debugger` keyword should not be present in production.
 
-Supprimez-le avant de commit.
+Remove it before committing.

@@ -6,8 +6,8 @@ pattern: rm\s+-f.*\/\*$
 action: block
 ---
 
-**Suppression forcée wildcard bloquée**
+**Forced wildcard deletion blocked**
 
-La commande `rm -f /*` force la suppression sans confirmation.
+The command `rm -f /*` forces deletion without confirmation.
 
-Cette opération est irréversible et potentiellement catastrophique.
+This operation is irreversible and potentially catastrophic.

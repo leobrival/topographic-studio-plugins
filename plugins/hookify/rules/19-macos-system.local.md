@@ -6,8 +6,8 @@ pattern: \/System\/
 action: warn
 ---
 
-**Accès répertoire système macOS détecté**
+**macOS system directory access detected**
 
-Le répertoire `/System/` contient les fichiers système critiques de macOS.
+The `/System/` directory contains critical macOS system files.
 
-Vérifiez que cet accès est nécessaire et intentionnel.
+Verify that this access is necessary and intentional.

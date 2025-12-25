@@ -6,8 +6,8 @@ pattern: fdisk
 action: block
 ---
 
-**Partitionnement bloqué : fdisk**
+**Partitioning blocked: fdisk**
 
-La commande `fdisk` modifie les tables de partition et peut rendre les disques inaccessibles.
+The `fdisk` command modifies partition tables and can make disks inaccessible.
 
-Utilisez des outils graphiques ou exécutez manuellement.
+Use graphical tools or run manually.

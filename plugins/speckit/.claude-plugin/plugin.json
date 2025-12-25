@@ -1,0 +1,9 @@
+{
+	"name": "speckit",
+	"version": "1.0.0",
+	"description": "Spec-kit CLI manager - install, update, check version, and initialize projects with spec-driven development",
+	"author": {
+		"name": "Leo Brival",
+		"email": "leo.brival@gmail.com"
+	}
+}

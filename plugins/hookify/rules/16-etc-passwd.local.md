@@ -6,8 +6,8 @@ pattern: \/etc\/passwd
 action: warn
 ---
 
-**Accès au fichier passwd détecté**
+**Passwd file access detected**
 
-Le fichier `/etc/passwd` contient les informations des comptes utilisateurs.
+The `/etc/passwd` file contains user account information.
 
-Vérifiez que cet accès est intentionnel et légitime.
+Verify that this access is intentional and legitimate.

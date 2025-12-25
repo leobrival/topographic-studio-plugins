@@ -6,8 +6,8 @@ pattern: \/usr\/bin\/.*\s+>
 action: block
 ---
 
-**Modification binaire système bloquée**
+**System binary modification blocked**
 
-L'écriture dans `/usr/bin/` peut corrompre les outils système essentiels.
+Writing to `/usr/bin/` can corrupt essential system tools.
 
-Les binaires système ne doivent jamais être modifiés par des scripts.
+System binaries should never be modified by scripts.

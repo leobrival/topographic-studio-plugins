@@ -6,11 +6,11 @@ pattern: rm\s+.*\/\*$
 action: block
 ---
 
-**Suppression wildcard bloquée**
+**Wildcard deletion blocked**
 
-La commande `rm /*` ou `rm path/*` supprime tous les fichiers d'un répertoire.
+The command `rm /*` or `rm path/*` deletes all files in a directory.
 
-Alternatives :
-- Lister d'abord : `ls path/*`
-- Supprimer fichier par fichier
-- Utiliser `rm -i` pour confirmation
+Alternatives:
+- List first: `ls path/*`
+- Delete files one by one
+- Use `rm -i` for confirmation

@@ -6,8 +6,8 @@ pattern: chmod\s+\+x\s+\/usr
 action: block
 ---
 
-**Modification permissions système bloquée**
+**System permission modification blocked**
 
-Modifier les permissions dans `/usr` peut compromettre la sécurité du système.
+Modifying permissions in `/usr` can compromise system security.
 
-Les fichiers système ne doivent pas être modifiés par des scripts automatisés.
+System files should not be modified by automated scripts.

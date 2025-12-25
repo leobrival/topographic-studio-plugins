@@ -10,11 +10,11 @@ conditions:
 action: warn
 ---
 
-**console.log détecté**
+**console.log detected**
 
-Les `console.log` devraient être retirés avant la mise en production.
+`console.log` statements should be removed before production.
 
-Alternatives :
-- Utiliser un logger structuré (pino, winston)
-- Supprimer avant commit
-- Utiliser des breakpoints pour le debug
+Alternatives:
+- Use a structured logger (pino, winston)
+- Remove before commit
+- Use breakpoints for debugging

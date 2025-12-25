@@ -6,8 +6,8 @@ pattern: chown\s+root
 action: block
 ---
 
-**Changement propriétaire root bloqué**
+**Root ownership change blocked**
 
-Transférer la propriété à root peut rendre des fichiers inaccessibles et créer des failles de sécurité.
+Transferring ownership to root can make files inaccessible and create security vulnerabilities.
 
-Exécutez manuellement si nécessaire.
+Run manually if needed.

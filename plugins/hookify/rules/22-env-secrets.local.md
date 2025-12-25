@@ -13,11 +13,11 @@ conditions:
 action: block
 ---
 
-**Secret hardcodé détecté**
+**Hardcoded secret detected**
 
-Ne jamais coder en dur des clés API, secrets, mots de passe ou tokens dans le code.
+Never hardcode API keys, secrets, passwords or tokens in code.
 
-Utilisez des variables d'environnement :
-- Créer un fichier `.env`
-- Ajouter `.env` au `.gitignore`
-- Charger avec `dotenv` ou équivalent
+Use environment variables:
+- Create a `.env` file
+- Add `.env` to `.gitignore`
+- Load with `dotenv` or equivalent

@@ -10,8 +10,8 @@ conditions:
 action: warn
 ---
 
-**TODO/FIXME détecté**
+**TODO/FIXME detected**
 
-Un commentaire TODO ou FIXME a été ajouté. Assurez-vous de le traiter avant la release.
+A TODO or FIXME comment was added. Make sure to address it before release.
 
-Bonne pratique : créer une issue pour suivre les TODOs.
+Best practice: create an issue to track TODOs.

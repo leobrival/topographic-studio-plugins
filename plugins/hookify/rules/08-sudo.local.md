@@ -6,8 +6,8 @@ pattern: sudo\s+
 action: block
 ---
 
-**Élévation de privilèges bloquée : sudo**
+**Privilege escalation blocked: sudo**
 
-Les commandes `sudo` s'exécutent avec les droits administrateur et peuvent modifier le système.
+Commands with `sudo` run with administrator rights and can modify the system.
 
-Pour des raisons de sécurité, exécutez ces commandes manuellement.
+For security reasons, run these commands manually.

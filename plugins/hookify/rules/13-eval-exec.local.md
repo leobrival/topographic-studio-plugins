@@ -6,11 +6,11 @@ pattern: (eval\s*\(|exec\s*\()
 action: block
 ---
 
-**Exécution de code dynamique bloquée**
+**Dynamic code execution blocked**
 
-Les fonctions `eval()` et `exec()` exécutent du code arbitraire et sont vecteurs d'injection.
+Functions `eval()` and `exec()` execute arbitrary code and are injection vectors.
 
-Risques de sécurité :
-- Injection de code
-- Exécution non contrôlée
-- Escalade de privilèges potentielle
+Security risks:
+- Code injection
+- Uncontrolled execution
+- Potential privilege escalation

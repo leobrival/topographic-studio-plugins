@@ -6,8 +6,8 @@ pattern: mkfs\.
 action: block
 ---
 
-**Création système de fichiers bloquée : mkfs**
+**Filesystem creation blocked: mkfs**
 
-Les commandes `mkfs.*` formatent les partitions et effacent toutes les données.
+Commands `mkfs.*` format partitions and erase all data.
 
-Opération irréversible - exécutez manuellement avec confirmation.
+Irreversible operation - run manually with confirmation.

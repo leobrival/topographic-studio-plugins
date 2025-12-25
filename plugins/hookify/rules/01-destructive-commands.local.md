@@ -6,11 +6,11 @@ pattern: rm\s+-rf
 action: block
 ---
 
-**Commande destructive bloquée : rm -rf**
+**Destructive command blocked: rm -rf**
 
-Cette commande supprime récursivement et de force tous les fichiers.
+This command recursively and forcefully deletes all files.
 
-Alternatives :
-- `rm -ri` : suppression interactive avec confirmation
-- `trash` : déplacer vers la corbeille
-- Vérifier le chemin avec `ls` d'abord
+Alternatives:
+- `rm -ri`: interactive deletion with confirmation
+- `trash`: move to trash bin
+- Check the path with `ls` first

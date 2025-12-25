@@ -6,8 +6,8 @@ pattern: dd\s+if=
 action: block
 ---
 
-**Accès disque direct bloqué : dd**
+**Direct disk access blocked: dd**
 
-La commande `dd` permet l'écriture directe sur les disques et peut écraser des données système.
+The `dd` command allows direct disk writing and can overwrite system data.
 
-Exécutez manuellement si nécessaire avec les privilèges appropriés.
+Run manually if needed with appropriate privileges.

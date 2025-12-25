@@ -6,11 +6,11 @@ pattern: curl.*\|\s*(sh|bash)
 action: block
 ---
 
-**Exécution distante bloquée : curl | sh**
+**Remote execution blocked: curl | sh**
 
-Télécharger et exécuter du code directement depuis Internet est extrêmement dangereux.
+Downloading and executing code directly from the Internet is extremely dangerous.
 
-Alternatives sécurisées :
-1. Télécharger le script : `curl -O url/script.sh`
-2. Inspecter le contenu : `cat script.sh`
-3. Exécuter après vérification : `bash script.sh`
+Secure alternatives:
+1. Download the script: `curl -O url/script.sh`
+2. Inspect the content: `cat script.sh`
+3. Execute after verification: `bash script.sh`
