@@ -1,0 +1,26 @@
+{
+	"name": "web-crawler",
+	"version": "1.0.0",
+	"description": "High-performance web crawler with TypeScript/Bun frontend and Go backend",
+	"type": "module",
+	"scripts": {
+		"start": "bun src/index.ts",
+		"install-deps": "./scripts/install.sh",
+		"lint": "biome check .",
+		"lint:fix": "biome check --write .",
+		"format": "biome format --write ."
+	},
+	"keywords": [
+		"crawler",
+		"web-scraping",
+		"go",
+		"typescript",
+		"bun",
+		"raycast"
+	],
+	"author": "leobrival",
+	"license": "MIT",
+	"devDependencies": {
+		"@biomejs/biome": "^2.3.5"
+	}
+}

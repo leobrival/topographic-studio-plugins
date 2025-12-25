@@ -1,0 +1,8 @@
+{
+	"name": "deep",
+	"description": "Deep crawling with moderate speed for comprehensive site analysis",
+	"maxDepth": 10,
+	"maxWorkers": 20,
+	"rateLimit": 3,
+	"timeout": 30
+}

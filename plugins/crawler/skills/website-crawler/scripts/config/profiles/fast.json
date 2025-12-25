@@ -1,0 +1,8 @@
+{
+	"name": "fast",
+	"description": "Fast crawling with high concurrency for quick site mapping",
+	"maxDepth": 3,
+	"maxWorkers": 50,
+	"rateLimit": 10,
+	"timeout": 15
+}

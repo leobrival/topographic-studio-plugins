@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+*.js.map
+
+# Go binary
+engine/crawler
+engine/go.sum
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test outputs
+test-results/
+coverage/
+
+# Temporary files
+*.tmp
+.cache/

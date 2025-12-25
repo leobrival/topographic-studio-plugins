@@ -1,0 +1,28 @@
+{
+	"maxDepth": 2,
+	"maxWorkers": 20,
+	"rateLimit": 2,
+	"timeout": 30,
+	"useSitemap": true,
+	"maxSitemapURLs": 1000,
+	"respectRobotsTxt": true,
+	"excludePatterns": [
+		"\\.jpg$",
+		"\\.jpeg$",
+		"\\.png$",
+		"\\.gif$",
+		"\\.svg$",
+		"\\.ico$",
+		"\\.pdf$",
+		"\\.zip$",
+		"\\.tar\\.gz$",
+		"\\.mp4$",
+		"\\.mp3$",
+		"\\.css$",
+		"\\.js$",
+		"^mailto:",
+		"^tel:",
+		"^javascript:"
+	],
+	"includePatterns": []
+}

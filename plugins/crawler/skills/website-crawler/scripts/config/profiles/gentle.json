@@ -1,0 +1,8 @@
+{
+	"name": "gentle",
+	"description": "Gentle crawling respecting server resources with low concurrency",
+	"maxDepth": 5,
+	"maxWorkers": 5,
+	"rateLimit": 1,
+	"timeout": 45
+}
