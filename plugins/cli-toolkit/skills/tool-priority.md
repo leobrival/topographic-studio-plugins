@@ -144,6 +144,51 @@ Before using MCP, verify:
 - [ ] Performance impact is acceptable
 - [ ] Token cost is justified
 
+## Available CLI Tools
+
+Use these CLI commands instead of MCP equivalents:
+
+| CLI | Command | Use Instead Of |
+|-----|---------|----------------|
+| GitHub | `gh` | GitHub API/MCP |
+| Docker | `docker` | Docker API |
+| Vercel | `vercel` | Vercel API |
+| Railway | `railway` | Railway API |
+| Neon | `neonctl` | Neon API |
+| Convex | `npx convex` | Convex API |
+| Playwright | `npx playwright` | Browser automation |
+| Lighthouse | `lighthouse` | Performance API |
+| Things 3 | AppleScript | Task management |
+
+### CLI Reference Commands
+
+Use these commands to get full CLI documentation:
+
+```bash
+/github-cli     # GitHub CLI reference
+/docker-cli     # Docker CLI reference
+/vercel-cli     # Vercel CLI reference
+/railway-cli    # Railway CLI reference
+/neon-cli       # Neon CLI reference
+/convex-cli     # Convex CLI reference
+/playwright-cli # Playwright CLI reference
+/lighthouse-cli # Lighthouse CLI reference
+```
+
+## Configured MCP Servers
+
+These MCPs provide unique functionality not available via CLI:
+
+| MCP | Purpose | When to Use |
+|-----|---------|-------------|
+| context7 | Library documentation | Real-time API docs lookup |
+| chrome-devtools | Browser automation | UI testing, screenshots |
+| hostinger-api | Hosting management | Hostinger-specific operations |
+| notion | Notion workspace | Note-taking, databases |
+| figma | Design system | Design token extraction |
+| n8n | Workflow automation | N8N workflow management |
+| tally | Form management | Tally forms |
+
 ## Summary
 
 ```
@@ -152,4 +197,15 @@ CLI > Bash > MCP
 Use CLI first. Always.
 Use Bash for glue operations.
 Use MCP only when no alternative exists.
+```
+
+## Quick Decision
+
+```
+Need GitHub operation? → gh CLI
+Need Docker operation? → docker CLI
+Need deployment? → vercel/railway CLI
+Need database? → neonctl CLI
+Need browser test? → Chrome DevTools MCP (exception)
+Need live docs? → Context7 MCP (exception)
 ```
