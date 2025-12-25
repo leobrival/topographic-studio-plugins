@@ -38,3 +38,6 @@ coverage/
 tmp/
 temp/
 *.tmp
+
+# Disabled (to be reactivated later)
+agents/
