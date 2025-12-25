@@ -1,0 +1,30 @@
+{
+	"name": "worktree-manager",
+	"version": "1.0.0",
+	"description": "Intelligent Git worktree manager with TypeScript/Bun - automates worktree creation, branch management, and GitHub issue integration",
+	"type": "module",
+	"scripts": {
+		"start": "bun src/index.ts",
+		"create": "bun src/index.ts create",
+		"list": "bun src/index.ts list",
+		"clean": "bun src/index.ts clean",
+		"install-deps": "./scripts/install.sh",
+		"lint": "biome check .",
+		"lint:fix": "biome check --write .",
+		"format": "biome format --write ."
+	},
+	"keywords": [
+		"git",
+		"worktree",
+		"github",
+		"workflow",
+		"typescript",
+		"bun",
+		"raycast"
+	],
+	"author": "leobrival",
+	"license": "MIT",
+	"devDependencies": {
+		"@biomejs/biome": "^2.3.5"
+	}
+}

@@ -84,6 +84,17 @@
 			},
 			"source": "./plugins/cli-toolkit",
 			"category": "productivity"
+		},
+		{
+			"name": "github-commands",
+			"description": "GitHub and Git workflow commands - commits, PRs, worktrees, debugging, and branch management",
+			"version": "1.0.0",
+			"author": {
+				"name": "Leo Brival",
+				"email": "leo.brival@gmail.com"
+			},
+			"source": "./plugins/github-commands",
+			"category": "development"
 		}
 	]
 }

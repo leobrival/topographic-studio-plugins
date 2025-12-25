@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+bun.lock
+
+# Build output
+dist/
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Runtime
+.DS_Store
+*.swp
+*.swo
+
+# Go binaries
+engine/worktree-manager
+engine/go.sum
+
+# User data
+.history/
+.worktrees.json

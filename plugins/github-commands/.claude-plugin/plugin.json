@@ -1,0 +1,11 @@
+{
+  "name": "github-commands",
+  "version": "1.0.0",
+  "description": "GitHub and Git workflow commands - commits, PRs, worktrees, debugging, and branch management",
+  "commands": ["./commands/*.md"],
+  "author": {
+    "name": "Leo Brival",
+    "email": "leo.brival@gmail.com"
+  },
+  "license": "MIT"
+}

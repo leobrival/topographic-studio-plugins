@@ -1,0 +1,19 @@
+{
+	"name": "full",
+	"description": "Full automation with all features enabled",
+	"autoInstallDeps": true,
+	"packageManager": "auto",
+	"copyEnvFiles": true,
+	"openTerminal": true,
+	"integrations": {
+		"github": {
+			"enabled": true,
+			"autoFetchIssue": true
+		},
+		"claude": {
+			"enabled": true,
+			"autoGenerateBranchName": true,
+			"autoStartPlanMode": true
+		}
+	}
+}

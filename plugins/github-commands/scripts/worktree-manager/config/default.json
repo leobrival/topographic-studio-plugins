@@ -1,0 +1,31 @@
+{
+	"worktreeBasePath": "~/Developer/worktrees",
+	"defaultBranch": "main",
+	"autoInstallDeps": true,
+	"packageManager": "auto",
+	"copyEnvFiles": true,
+	"openTerminal": true,
+	"terminalApp": "Hyper",
+	"integrations": {
+		"github": {
+			"enabled": true,
+			"autoFetchIssue": true
+		},
+		"claude": {
+			"enabled": true,
+			"autoGenerateBranchName": true,
+			"autoStartPlanMode": true
+		}
+	},
+	"cleanup": {
+		"autoCleanMerged": false,
+		"maxAge": 30,
+		"keepRecent": 10
+	},
+	"hooks": {
+		"preCreate": null,
+		"postCreate": null,
+		"preCleanup": null,
+		"postCleanup": null
+	}
+}

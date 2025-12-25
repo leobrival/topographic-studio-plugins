@@ -1,0 +1,17 @@
+{
+	"name": "minimal",
+	"description": "Minimal setup without automation",
+	"autoInstallDeps": false,
+	"openTerminal": false,
+	"integrations": {
+		"github": {
+			"enabled": true,
+			"autoFetchIssue": true
+		},
+		"claude": {
+			"enabled": false,
+			"autoGenerateBranchName": false,
+			"autoStartPlanMode": false
+		}
+	}
+}
