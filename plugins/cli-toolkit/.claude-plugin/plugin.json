@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "CLI reference commands for popular development tools - GitHub, Docker, Vercel, Railway, and more",
   "commands": ["commands/*.md"],
+  "skills": ["skills/*.md"],
   "author": "leobrival",
   "license": "MIT",
   "keywords": [
