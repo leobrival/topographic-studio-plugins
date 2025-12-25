@@ -1,6 +1,6 @@
 # Topographic Studio Plugins
 
-Topographic Studio plugins for Claude Code.
+Topographic Studio plugins for Claude Code - crawling, product strategy, and technical engineering agents.
 
 ## Installation
 
@@ -13,7 +13,14 @@ Topographic Studio plugins for Claude Code.
 ### Install plugins
 
 ```bash
-/plugin install <plugin-name>@topographic-studio-plugins
+# Install the crawler
+/plugin install crawler@topographic-studio-plugins
+
+# Install product/marketing agents
+/plugin install ideabrowser@topographic-studio-plugins
+
+# Install technical engineering agents
+/plugin install roadmap@topographic-studio-plugins
 ```
 
 ### Verify installation
@@ -24,7 +31,33 @@ Topographic Studio plugins for Claude Code.
 
 ## Available Plugins
 
-_No plugins available yet._
+### crawler
+
+High-performance web crawler for discovering and mapping website structure.
+
+- Sitemap discovery and parsing
+- Checkpoint/resume support
+- Rate limiting
+- HTML report generation
+
+### ideabrowser
+
+Product and marketing agents for ideation, strategy, and execution.
+
+- 30+ specialized agents
+- Landing pages, user personas, PRDs
+- Marketing strategy, SEO, content
+- Pricing, analytics, customer success
+
+### roadmap
+
+Technical engineering agents for software development and architecture.
+
+- 28+ specialized agents
+- System design, architecture patterns
+- Frontend, backend, fullstack
+- DevOps, cloud, data engineering
+- AI/ML, prompt engineering
 
 ## File Structure
 
@@ -33,33 +66,11 @@ topographic-studio-plugins/
 ├── .claude-plugin/
 │   └── marketplace.json
 ├── plugins/
-│   └── <plugin-name>/
-│       ├── .claude-plugin/
-│       │   └── plugin.json
-│       ├── commands/
-│       ├── agents/
-│       ├── hooks/
-│       └── README.md
+│   ├── crawler/
+│   ├── ideabrowser/
+│   └── roadmap/
 └── README.md
 ```
-
-## Development
-
-### Adding New Plugins
-
-Create a new directory under `plugins/` with the following structure:
-
-```
-plugins/my-new-plugin/
-├── .claude-plugin/
-│   └── plugin.json
-├── commands/
-├── agents/
-├── hooks/
-└── README.md
-```
-
-Then add the plugin entry to `.claude-plugin/marketplace.json`.
 
 ## License
 

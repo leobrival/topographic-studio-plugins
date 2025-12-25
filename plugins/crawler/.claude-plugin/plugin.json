@@ -1,0 +1,9 @@
+{
+	"name": "crawler",
+	"description": "High-performance web crawler for discovering and mapping website structure",
+	"version": "1.0.0",
+	"author": {
+		"name": "Leo Brival",
+		"email": "leo.brival@gmail.com"
+	}
+}

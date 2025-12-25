@@ -1,0 +1,9 @@
+{
+	"name": "roadmap",
+	"description": "Technical engineering agents for software development and architecture",
+	"version": "1.0.0",
+	"author": {
+		"name": "Leo Brival",
+		"email": "leo.brival@gmail.com"
+	}
+}

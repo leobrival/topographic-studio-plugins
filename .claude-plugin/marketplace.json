@@ -2,10 +2,44 @@
 	"$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
 	"name": "topographic-studio-plugins",
 	"version": "1.0.0",
-	"description": "Topographic Studio plugins for Claude Code",
+	"description": "Topographic Studio plugins for Claude Code - crawling, product strategy, and technical engineering agents",
 	"owner": {
 		"name": "Leo Brival",
 		"email": "leo.brival@gmail.com"
 	},
-	"plugins": []
+	"plugins": [
+		{
+			"name": "crawler",
+			"description": "High-performance web crawler for discovering and mapping website structure",
+			"version": "1.0.0",
+			"author": {
+				"name": "Leo Brival",
+				"email": "leo.brival@gmail.com"
+			},
+			"source": "./plugins/crawler",
+			"category": "productivity"
+		},
+		{
+			"name": "ideabrowser",
+			"description": "Product and marketing agents for ideation, strategy, and execution",
+			"version": "1.0.0",
+			"author": {
+				"name": "Leo Brival",
+				"email": "leo.brival@gmail.com"
+			},
+			"source": "./plugins/ideabrowser",
+			"category": "productivity"
+		},
+		{
+			"name": "roadmap",
+			"description": "Technical engineering agents for software development and architecture",
+			"version": "1.0.0",
+			"author": {
+				"name": "Leo Brival",
+				"email": "leo.brival@gmail.com"
+			},
+			"source": "./plugins/roadmap",
+			"category": "development"
+		}
+	]
 }

@@ -1,0 +1,1 @@
+/Users/leobrival/.claude/agents/ideabrowser/product-technical-specs.md
