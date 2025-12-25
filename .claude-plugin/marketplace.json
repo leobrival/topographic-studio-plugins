@@ -95,6 +95,17 @@
 			},
 			"source": "./plugins/github-commands",
 			"category": "development"
+		},
+		{
+			"name": "code-workflows",
+			"description": "Development workflow commands - EPCT methodology and production-ready logging setup",
+			"version": "1.0.0",
+			"author": {
+				"name": "Leo Brival",
+				"email": "leo.brival@gmail.com"
+			},
+			"source": "./plugins/code-workflows",
+			"category": "development"
 		}
 	]
 }

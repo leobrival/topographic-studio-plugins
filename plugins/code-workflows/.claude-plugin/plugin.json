@@ -1,0 +1,11 @@
+{
+  "name": "code-workflows",
+  "version": "1.0.0",
+  "description": "Development workflow commands - EPCT methodology and production-ready logging setup",
+  "commands": ["./commands/*.md"],
+  "author": {
+    "name": "Leo Brival",
+    "email": "leo.brival@gmail.com"
+  },
+  "license": "MIT"
+}
