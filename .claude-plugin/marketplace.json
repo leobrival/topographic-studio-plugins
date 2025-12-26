@@ -117,6 +117,17 @@
 			},
 			"source": "./plugins/blog-kit",
 			"category": "productivity"
+		},
+		{
+			"name": "ralph-loop",
+			"description": "Ralph Wiggum technique - continuous self-referential AI loops for iterative development until task completion",
+			"version": "1.0.0",
+			"author": {
+				"name": "Leo Brival",
+				"email": "leo.brival@gmail.com"
+			},
+			"source": "./plugins/ralph-loop",
+			"category": "productivity"
 		}
 	]
 }
