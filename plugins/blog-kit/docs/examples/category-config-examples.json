@@ -1,0 +1,188 @@
+{
+  "_comment": "Examples of .category.json configurations for different post types",
+  "_usage": "Place one of these configs in articles/{lang}/{category}/.category.json",
+
+  "actionnable_example": {
+    "name": "tutorials",
+    "displayName": "Tutorials",
+    "description": "Step-by-step technical tutorials with practical implementation",
+    "postType": "actionnable",
+    "defaultTone": "imperative",
+    "funnelStageAffinity": "BOFU",
+    "requiredComponents": [
+      "code-block"
+    ],
+    "recommendedComponents": [
+      "callout",
+      "pros-cons",
+      "faq-item"
+    ],
+    "minCodeBlocks": 3,
+    "targetWordCount": {
+      "min": 2000,
+      "max": 3500
+    },
+    "ctaGuidelines": {
+      "primary": "Implementation-focused (free trial, demo, setup guide)",
+      "secondary": "Related tutorials, documentation links",
+      "tone": "Directive, action-oriented"
+    },
+    "exampleKeywords": [
+      "How to implement...",
+      "Tutorial:",
+      "Step-by-step guide to...",
+      "Getting started with..."
+    ]
+  },
+
+  "aspirationnel_example": {
+    "name": "case-studies",
+    "displayName": "Success Stories",
+    "description": "Inspirational stories and visionary content about future trends",
+    "postType": "aspirationnel",
+    "defaultTone": "motivating",
+    "funnelStageAffinity": "TOFU",
+    "requiredComponents": [
+      "quotation"
+    ],
+    "recommendedComponents": [
+      "statistic",
+      "citation",
+      "callout"
+    ],
+    "minQuotations": 2,
+    "targetWordCount": {
+      "min": 1500,
+      "max": 2500
+    },
+    "ctaGuidelines": {
+      "primary": "Low commitment (newsletter, community, whitepaper)",
+      "secondary": "Related success stories, vision articles",
+      "tone": "Invitational, optimistic"
+    },
+    "exampleKeywords": [
+      "The future of...",
+      "How [Company] transformed...",
+      "Case study:",
+      "Success story:",
+      "The rise of..."
+    ]
+  },
+
+  "analytique_example": {
+    "name": "comparisons",
+    "displayName": "Tool Comparisons",
+    "description": "Data-driven analysis and objective comparisons",
+    "postType": "analytique",
+    "defaultTone": "objective",
+    "funnelStageAffinity": "MOFU",
+    "requiredComponents": [
+      "comparison-table",
+      "statistic"
+    ],
+    "recommendedComponents": [
+      "pros-cons",
+      "citation",
+      "code-block"
+    ],
+    "minTables": 1,
+    "minStatistics": 3,
+    "targetWordCount": {
+      "min": 2000,
+      "max": 3000
+    },
+    "ctaGuidelines": {
+      "primary": "Evaluation-focused (comparison guide, assessment, webinar)",
+      "secondary": "Benchmark reports, detailed analysis",
+      "tone": "Consultative, factual"
+    },
+    "exampleKeywords": [
+      "[Tool A] vs [Tool B]",
+      "Comparison:",
+      "Benchmark:",
+      "Analysis of...",
+      "Best tools for..."
+    ]
+  },
+
+  "anthropologique_example": {
+    "name": "insights",
+    "displayName": "Developer Insights",
+    "description": "Understanding human behavior, culture, and team dynamics",
+    "postType": "anthropologique",
+    "defaultTone": "exploratory",
+    "funnelStageAffinity": "TOFU",
+    "requiredComponents": [
+      "quotation"
+    ],
+    "recommendedComponents": [
+      "statistic",
+      "citation",
+      "callout"
+    ],
+    "minQuotations": 3,
+    "minStatistics": 2,
+    "targetWordCount": {
+      "min": 1800,
+      "max": 2800
+    },
+    "ctaGuidelines": {
+      "primary": "Community-focused (share experience, join discussion, newsletter)",
+      "secondary": "Related behavioral articles, surveys",
+      "tone": "Empathetic, curious"
+    },
+    "exampleKeywords": [
+      "Why developers...",
+      "The psychology of...",
+      "Understanding [culture]...",
+      "Team dynamics in...",
+      "Developer behavior..."
+    ]
+  },
+
+  "mixed_example": {
+    "_comment": "Example for categories that can span multiple post types",
+    "name": "guides",
+    "displayName": "Complete Guides",
+    "description": "Comprehensive guides that can be aspirational or analytical",
+    "postType": "aspirationnel",
+    "_alternative": "analytique (depending on guide focus)",
+    "defaultTone": "consultative",
+    "funnelStageAffinity": "MOFU",
+    "requiredComponents": [
+      "quotation",
+      "statistic"
+    ],
+    "recommendedComponents": [
+      "comparison-table",
+      "pros-cons",
+      "code-block",
+      "faq-item"
+    ],
+    "targetWordCount": {
+      "min": 3000,
+      "max": 5000
+    },
+    "ctaGuidelines": {
+      "primary": "Value-focused (whitepaper, guide download, webinar)",
+      "secondary": "Related guides, tool recommendations",
+      "tone": "Consultative, balanced"
+    },
+    "exampleKeywords": [
+      "Complete guide to...",
+      "Everything you need to know...",
+      "Comprehensive guide:",
+      "Ultimate guide to..."
+    ]
+  },
+
+  "_notes": {
+    "postType_required": true,
+    "postType_values": ["actionnable", "aspirationnel", "analytique", "anthropologique"],
+    "funnelStageAffinity_optional": true,
+    "funnelStageAffinity_values": ["TOFU", "MOFU", "BOFU"],
+    "components_note": "Components should match .templates/components/ registry",
+    "detection_fallback": "If .category.json missing, agent infers from category name",
+    "inheritance": "Article-level config can override category settings"
+  }
+}

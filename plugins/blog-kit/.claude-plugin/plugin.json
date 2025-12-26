@@ -1,0 +1,24 @@
+{
+  "name": "blog-kit",
+  "version": "0.2.0",
+  "description": "Generate SEO/GEO-optimized blog articles using JSON templates and AI agents",
+  "commands": ["./commands/*.md"],
+  "agents": [
+    "./agents/analyzer.md",
+    "./agents/copywriter.md",
+    "./agents/geo-specialist.md",
+    "./agents/marketing-specialist.md",
+    "./agents/persona-specialist.md",
+    "./agents/quality-optimizer.md",
+    "./agents/research-intelligence.md",
+    "./agents/seo-specialist.md",
+    "./agents/translator.md"
+  ],
+  "author": {
+    "name": "Leo Brival",
+    "email": "leo.brival@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": ["blog", "content-generation", "seo", "geo", "templates", "ai-agents"],
+  "category": "productivity"
+}
