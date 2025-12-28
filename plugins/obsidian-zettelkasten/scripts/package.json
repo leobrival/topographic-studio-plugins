@@ -1,0 +1,26 @@
+{
+	"name": "zettelkasten-validators",
+	"version": "1.0.0",
+	"description": "Validation scripts for Obsidian Zettelkasten notes",
+	"type": "module",
+	"scripts": {
+		"validate": "bun run src/index.ts",
+		"validate:frontmatter": "bun run src/validators/frontmatter.ts",
+		"validate:structure": "bun run src/validators/structure.ts",
+		"validate:links": "bun run src/validators/links.ts",
+		"validate:orphans": "bun run src/validators/orphans.ts",
+		"lint": "biome check .",
+		"lint:fix": "biome check --write .",
+		"format": "biome format --write ."
+	},
+	"dependencies": {
+		"yaml": "^2.3.4",
+		"chalk": "^5.3.0",
+		"glob": "^10.3.10"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.3.5",
+		"@types/bun": "latest",
+		"typescript": "^5.3.3"
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"name": "obsidian-zettelkasten",
+	"description": "Zettelkasten note-taking methodology agent for Obsidian. Create atomic notes, literature notes, fleeting notes, MOCs, and intelligent linking.",
+	"version": "1.0.0",
+	"author": {
+		"name": "Leo Brival",
+		"email": "leo.brival@gmail.com"
+	}
+}
