@@ -1,7 +1,7 @@
 ---
 description: Validate notes frontmatter, structure, and links using Bun/TypeScript validators
-argument-hint: "[--frontmatter] [--structure] [--links] [--all] [--strict] [--fix]"
-allowed-tools: ["Read", "Write", "Edit", "Glob", "Grep", "Bash", "AskUserQuestion", "Skill", "TodoWrite"]
+argument-hint: "[vault-path]"
+allowed-tools: ["Read", "Write", "Edit", "Glob", "Grep", "Bash", "AskUserQuestion", "TodoWrite"]
 ---
 
 # Validate Zettelkasten Notes
@@ -10,79 +10,90 @@ Run validation checks on your Obsidian vault using TypeScript validators.
 
 ## Your Task
 
-Validate notes based on: `$ARGUMENTS`
+Validate notes in the vault specified by `$ARGUMENTS` (or detect automatically).
 
-## Validation Modes
+## Interactive Workflow
 
-Parse `$ARGUMENTS`:
+### Step 1: Detect or Ask for Vault Path
 
-1. **--frontmatter**: Validate YAML frontmatter only
-2. **--structure**: Validate note structure only
-3. **--links**: Validate links and connections
-4. **--all**: Run all validators (default if no args)
-5. **--strict**: Treat warnings as errors
-6. **--fix**: Attempt to auto-fix issues
+If `$ARGUMENTS` is empty or no vault path provided:
 
-## Prerequisites
+1. Try to auto-detect vault:
+   ```bash
+   ls -d ~/Documents/Obsidian* ~/Obsidian* 2>/dev/null | head -5
+   ```
 
-Check if scripts are installed:
+2. If multiple vaults found or none detected, use `AskUserQuestion`:
+   ```
+   question: "Which Obsidian vault do you want to validate?"
+   header: "Vault"
+   options:
+     - label: "~/Documents/Obsidian/MyVault"
+       description: "Detected vault"
+     - label: "Enter custom path"
+       description: "Specify a different location"
+   ```
 
-```bash
-# Check for Bun
-which bun
+### Step 2: Ask Validation Type
 
-# Check if dependencies installed
-ls $VAULT/.scripts/node_modules 2>/dev/null || echo "Need to install"
+Use `AskUserQuestion` to determine what to validate:
+
+```
+question: "What do you want to validate?"
+header: "Validators"
+multiSelect: true
+options:
+  - label: "All (Recommended)"
+    description: "Run frontmatter, structure, and link validators"
+  - label: "Frontmatter"
+    description: "Check YAML metadata (id, title, dates, type, status)"
+  - label: "Structure"
+    description: "Check note atomicity, headings, word count"
+  - label: "Links"
+    description: "Check broken links, orphans, weak connections"
 ```
 
-If not installed:
-```bash
-cd $VAULT/.scripts && bun install
+### Step 3: Ask Validation Options
+
+Use `AskUserQuestion` for additional options:
+
+```
+question: "Validation options?"
+header: "Options"
+multiSelect: true
+options:
+  - label: "Normal mode (Recommended)"
+    description: "Errors fail, warnings are informational"
+  - label: "Strict mode"
+    description: "Treat warnings as errors"
+  - label: "Auto-fix"
+    description: "Attempt to fix common issues automatically"
+  - label: "Generate report"
+    description: "Save results to a markdown file"
 ```
 
-## Workflow
+### Step 4: Run Validators
 
-### Step 1: Detect Vault
-
-```bash
-# Find vault
-VAULT=$(ls -d ~/Documents/Obsidian* 2>/dev/null | head -1)
-
-# Check for scripts directory
-if [ ! -d "$VAULT/.scripts" ]; then
-  echo "Scripts not found. Installing..."
-fi
-```
-
-### Step 2: Run Validators
-
-#### Full Validation (default)
+Based on user choices, execute the appropriate validators:
 
 ```bash
-cd $VAULT/.scripts && bun run validate $VAULT
+cd $VAULT/.scripts && bun run validate $VAULT [options]
 ```
 
-#### Frontmatter Only
+**Validator Commands:**
+- Full: `bun run validate $VAULT`
+- Frontmatter: `bun run validate:frontmatter $VAULT`
+- Structure: `bun run validate:structure $VAULT`
+- Links: `bun run validate:links $VAULT`
 
-```bash
-cd $VAULT/.scripts && bun run validate:frontmatter $VAULT
-```
+**Options:**
+- Strict: `--strict`
+- Output JSON: `--output json --file report.json`
+- Output Markdown: `--output markdown --file report.md`
 
-#### Structure Only
+### Step 5: Present Results
 
-```bash
-cd $VAULT/.scripts && bun run validate:structure $VAULT
-```
-
-#### Links Only
-
-```bash
-cd $VAULT/.scripts && bun run validate:links $VAULT
-```
-
-### Step 3: Parse Output
-
-The validators output structured results. Parse and present:
+Display a formatted report:
 
 ```
 ZETTELKASTEN VALIDATION REPORT
@@ -90,239 +101,114 @@ ZETTELKASTEN VALIDATION REPORT
 Vault: /Users/you/Documents/Obsidian/MyVault
 Time: 2024-01-15T10:30:00Z
 
-─ Summary ─
+--- Summary ---
   Total notes:  127
   Valid:        120 (94.5%)
   Invalid:      7
   Errors:       12
   Warnings:     23
 
-─ Notes by Type ─
+--- Notes by Type ---
   permanent     89
   literature    23
   moc           8
   fleeting      7
 
-─ Notes by Status ─
-  evergreen     34
-  budding       28
-  seedling      27
-
-─ Issues ─
-  Orphan notes: 5
-  Broken links: 3
-  Missing frontmatter: 2
-
-─ Invalid Notes ─
+--- Issues Found ---
 
 FAIL compound-habits.md
   ERROR [frontmatter] Missing required field "id"
   WARN  [structure] Note has 7 H2 sections. Consider splitting
 
-FAIL literature-note.md
-  ERROR [source.title] Source is missing title
-
 FAIL orphan-note.md
   WARN  [links] Orphan note: no incoming or outgoing links
 ```
 
-### Step 4: Offer Fixes (if --fix)
+### Step 6: Offer Next Actions
 
-For fixable issues, offer to auto-repair:
-
-```
-Found 5 fixable issues:
-
-1. Missing ID (3 notes)
-   - compound-habits.md
-   - new-idea.md
-   - random-thought.md
-
-   Fix: Generate ID from filename timestamp or current time
-
-2. Missing modified date (2 notes)
-   - old-note.md
-   - untouched.md
-
-   Fix: Set modified to file modification time
-
-Apply fixes? (all / select / skip)
-```
-
-#### Auto-Fix Logic
-
-**Missing ID**:
-```typescript
-// Generate from filename if timestamp pattern
-const match = filename.match(/^(\d{12})/);
-if (match) {
-  frontmatter.id = match[1];
-} else {
-  // Use current timestamp
-  frontmatter.id = new Date().toISOString()
-    .replace(/[-:T]/g, '')
-    .slice(0, 12);
-}
-```
-
-**Missing dates**:
-```typescript
-// Get file stats
-const stats = await Bun.file(path).stat();
-frontmatter.modified = stats.mtime.toISOString();
-if (!frontmatter.created) {
-  frontmatter.created = stats.birthtime.toISOString();
-}
-```
-
-**Missing type**:
-```typescript
-// Infer from folder
-if (path.includes('/0-inbox/')) frontmatter.type = 'fleeting';
-if (path.includes('/1-literature/')) frontmatter.type = 'literature';
-if (path.includes('/2-permanent/')) frontmatter.type = 'permanent';
-if (path.includes('/3-moc/')) frontmatter.type = 'moc';
-```
-
-### Step 5: Report Results
+If issues were found, use `AskUserQuestion`:
 
 ```
-Validation Complete
+question: "Issues found. What would you like to do next?"
+header: "Next step"
+options:
+  - label: "Auto-fix issues"
+    description: "Attempt to fix 5 fixable issues automatically"
+  - label: "Review manually"
+    description: "Run /review to examine each issue"
+  - label: "Find connections"
+    description: "Run /link to fix orphan notes"
+  - label: "Done"
+    description: "Exit validation"
+```
 
-Summary:
-├── Notes validated: 127
-├── Valid: 125 (98.4%)
-├── Fixed: 5
-├── Remaining issues: 2
+## Prerequisites Check
 
-Remaining Issues:
-1. broken-link.md - Links to non-existent note
-   Action: Remove link or create target note
+Before running validators, check:
 
-2. too-long.md - Exceeds 1000 word limit
-   Action: Split into multiple notes
+```bash
+# Check for Bun
+which bun || echo "Bun not installed"
 
-Run /review to address these manually.
+# Check if scripts exist in vault
+ls $VAULT/.scripts/package.json 2>/dev/null || echo "Scripts not installed"
+```
+
+If prerequisites missing, offer to install:
+
+```
+question: "Validation scripts not found. Install them?"
+header: "Install"
+options:
+  - label: "Yes, install now (Recommended)"
+    description: "Copy scripts and install dependencies"
+  - label: "No, cancel"
+    description: "Exit without validating"
 ```
 
 ## Validator Details
 
 ### Frontmatter Validator
-
-Checks:
-- [ ] Valid YAML syntax
-- [ ] Required fields present (by note type)
-- [ ] ID format (YYYYMMDDHHmm)
-- [ ] Date format (ISO 8601)
-- [ ] Valid type value
-- [ ] Valid status value
-- [ ] Source fields for literature notes
-- [ ] Aliases array format
-- [ ] Tags array format
+- Valid YAML syntax
+- Required fields (id, title, created, type, status)
+- ID format (YYYYMMDDHHmm)
+- Date format (ISO 8601)
+- Valid type/status values
+- Source fields for literature notes
 
 ### Structure Validator
-
-Checks:
-- [ ] Atomicity (single concept)
-- [ ] H1 heading present
-- [ ] No heading level jumps
-- [ ] Required sections by type
-- [ ] Word count limits
-- [ ] Content not empty
-- [ ] No placeholder text
-- [ ] Quote density for permanent notes
-- [ ] Connections section for linked notes
+- Atomicity (single concept per note)
+- H1 heading present
+- No heading level jumps
+- Word count limits by type
+- No placeholder text (TODO, FIXME)
 
 ### Link Validator
+- All links resolve to existing notes
+- No self-referencing links
+- Orphan notes detection
+- Weakly connected notes (< 2 links)
+- Broken links count
 
-Checks:
-- [ ] All links resolve to existing notes
-- [ ] No self-referencing links
-- [ ] No duplicate links
-- [ ] Orphan notes detection
-- [ ] Weakly connected notes
-- [ ] Broken links count
+## Auto-Fix Capabilities
 
-## Configuration
+When auto-fix is enabled:
 
-Create `.validaterc.json` in vault root:
+1. **Missing ID**: Generate from filename timestamp or current time
+2. **Missing dates**: Set from file modification time
+3. **Missing type**: Infer from folder structure
+4. **Missing status**: Default to "seedling"
 
-```json
-{
-  "strict": false,
-  "exclude": [
-    ".vectors",
-    ".obsidian",
-    "templates",
-    "archive"
-  ],
-  "rules": {
-    "frontmatter": {
-      "requireId": true,
-      "requireType": true,
-      "requireStatus": false
-    },
-    "structure": {
-      "maxWordCount": 1000,
-      "minWordCount": 50,
-      "requireH1": true
-    },
-    "links": {
-      "minLinks": 1,
-      "checkOrphans": true
-    }
-  }
-}
-```
-
-## Output Formats
-
-### JSON Report
-
-```bash
-bun run validate $VAULT --output json --file report.json
-```
-
-### Markdown Report
-
-```bash
-bun run validate $VAULT --output markdown --file report.md
-```
-
-## Integration with Review
-
-After validation, suggest:
+Always confirm before applying fixes:
 
 ```
-Validation found issues that /review can help with:
-
-1. Orphan notes (5) → /review --orphans
-2. Weak connections (12) → /link --suggest
-3. Fleeting notes overdue (3) → /review --fleeting
-
-Run these commands to address issues.
-```
-
-## Error Handling
-
-**If scripts not found**:
-```
-Validation scripts not installed.
-
-Install with:
-1. Copy scripts to vault: cp -r plugin/scripts $VAULT/.scripts
-2. Install dependencies: cd $VAULT/.scripts && bun install
-
-Or run: /validate --install
-```
-
-**If Bun not installed**:
-```
-Bun runtime not found.
-
-Install with:
-curl -fsSL https://bun.sh/install | bash
-
-Or use npm:
-npm install && npm run validate
+question: "Found 5 fixable issues. Apply fixes?"
+header: "Confirm"
+options:
+  - label: "Yes, fix all"
+    description: "Apply all automatic fixes"
+  - label: "Review each"
+    description: "Confirm each fix individually"
+  - label: "No, skip"
+    description: "Don't apply any fixes"
 ```
