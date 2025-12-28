@@ -1,9 +1,25 @@
 {
 	"name": "obsidian-zettelkasten",
-	"description": "Zettelkasten note-taking methodology agent for Obsidian. Create atomic notes, literature notes, fleeting notes, MOCs, and intelligent linking.",
 	"version": "1.0.0",
+	"description": "Zettelkasten note-taking methodology agent for Obsidian. Create atomic notes, literature notes, fleeting notes, MOCs, and intelligent linking.",
+	"commands": ["./commands/*.md"],
+	"agents": ["./agents/zettelkasten-specialist.md"],
+	"skills": [
+		"./skills/zettelkasten-methodology",
+		"./skills/vector-search"
+	],
 	"author": {
 		"name": "Leo Brival",
 		"email": "leo.brival@gmail.com"
-	}
+	},
+	"license": "MIT",
+	"keywords": [
+		"obsidian",
+		"zettelkasten",
+		"note-taking",
+		"knowledge-management",
+		"atomic-notes",
+		"vector-search"
+	],
+	"category": "productivity"
 }
