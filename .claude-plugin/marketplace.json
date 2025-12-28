@@ -128,6 +128,28 @@
 			},
 			"source": "./plugins/ralph-loop",
 			"category": "productivity"
+		},
+		{
+			"name": "speckit-lite",
+			"description": "Lightweight Spec-Driven Development toolkit - specifications, plans, and tasks that guide AI implementation",
+			"version": "1.0.0",
+			"author": {
+				"name": "Leo Brival",
+				"email": "leo.brival@gmail.com"
+			},
+			"source": "./plugins/speckit-lite",
+			"category": "development"
+		},
+		{
+			"name": "obsidian-zettelkasten",
+			"description": "Zettelkasten note-taking methodology agent for Obsidian - atomic notes, literature notes, MOCs, vector search, and validation",
+			"version": "1.0.0",
+			"author": {
+				"name": "Leo Brival",
+				"email": "leo.brival@gmail.com"
+			},
+			"source": "./plugins/obsidian-zettelkasten",
+			"category": "productivity"
 		}
 	]
 }
