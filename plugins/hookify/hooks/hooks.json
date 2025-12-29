@@ -21,6 +21,18 @@
 						"timeout": 10
 					}
 				]
+			},
+			{
+				"matcher": {
+					"tool_name": "Edit|Write|MultiEdit"
+				},
+				"hooks": [
+					{
+						"type": "command",
+						"command": "bun ${CLAUDE_PLUGIN_ROOT}/hooks/md-formatter.ts",
+						"timeout": 15
+					}
+				]
 			}
 		],
 		"Stop": [
