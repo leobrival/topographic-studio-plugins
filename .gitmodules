@@ -1,0 +1,3 @@
+[submodule "plugins/web-crawler"]
+	path = plugins/web-crawler
+	url = https://github.com/leobrival/rcrawler.git
