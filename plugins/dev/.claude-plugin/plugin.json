@@ -1,0 +1,25 @@
+{
+	"name": "dev",
+	"version": "1.0.0",
+	"description": "Development CLI skills and GitHub workflows - Docker, Vercel, Railway, Neon, deployment platforms, and automated Git/GitHub workflows. Use for deployment, containerization, database management, infrastructure operations, and collaborative development.",
+	"skills": [
+		"./skills/adonisjs-cli/SKILL.md",
+		"./skills/convex-cli/SKILL.md",
+		"./skills/coolify-api/SKILL.md",
+		"./skills/docker-cli/SKILL.md",
+		"./skills/github-cli/SKILL.md",
+		"./skills/lighthouse-cli/SKILL.md",
+		"./skills/neon-cli/SKILL.md",
+		"./skills/nextjs-cli/SKILL.md",
+		"./skills/playwright-cli/SKILL.md",
+		"./skills/railway-cli/SKILL.md",
+		"./skills/raycast-cli/SKILL.md",
+		"./skills/spec-kit/SKILL.md",
+		"./skills/vercel-cli/SKILL.md"
+	],
+	"author": {
+		"name": "Leo Brival",
+		"email": "leo.brival@gmail.com"
+	},
+	"license": "MIT"
+}

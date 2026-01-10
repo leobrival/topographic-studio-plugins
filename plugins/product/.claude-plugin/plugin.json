@@ -1,0 +1,22 @@
+{
+	"$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+	"name": "product",
+	"version": "1.0.0",
+	"description": "Product design and management tools for building user-centric products",
+	"author": {
+		"name": "Leo Brival",
+		"email": "leo.brival@gmail.com"
+	},
+	"agents": [
+		{
+			"file": "agents/product-designer.md",
+			"name": "product-designer",
+			"type": "agent"
+		},
+		{
+			"file": "skills/user-personas/SKILL.md",
+			"name": "user-personas",
+			"type": "skill"
+		}
+	]
+}

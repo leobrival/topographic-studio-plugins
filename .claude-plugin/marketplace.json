@@ -1,0 +1,34 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "topographic-plugins-official",
+  "version": "1.0.0",
+  "description": "Official Topographic plugins for Claude Code - development CLI, GitHub workflows, and product design",
+  "owner": {
+    "name": "Leo Brival",
+    "email": "leo.brival@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "dev",
+      "description": "Development CLI skills and GitHub workflows - Docker, Vercel, Railway, Neon, deployment platforms, and automated Git/GitHub workflows for commits, PRs, worktrees, and branch management",
+      "version": "1.0.0",
+      "author": {
+        "name": "Leo Brival",
+        "email": "leo.brival@gmail.com"
+      },
+      "source": "./plugins/dev",
+      "category": "development"
+    },
+    {
+      "name": "product",
+      "description": "Product design and management tools for building user-centric products",
+      "version": "1.0.0",
+      "author": {
+        "name": "Leo Brival",
+        "email": "leo.brival@gmail.com"
+      },
+      "source": "./plugins/product",
+      "category": "development"
+    }
+  ]
+}
