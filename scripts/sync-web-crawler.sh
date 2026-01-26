@@ -34,8 +34,10 @@ mkdir -p "$SKILL_DIR/scripts"
 # Copy SKILL.md to skill root
 cp "$SOURCE_SKILL/SKILL.md" "$SKILL_DIR/"
 
-# Note: Source repo uses "web-crawler" in frontmatter which matches our directory name
-# No sed fix needed since names are now aligned
+# Fix SKILL.md frontmatter - remove unsupported fields (version, allowed-tools)
+# and ensure name matches directory
+sed -i '' '/^version:/d; /^allowed-tools:/,/^[^ -]/{ /^allowed-tools:/d; /^  -/d; }' "$SKILL_DIR/SKILL.md"
+sed -i '' 's/^name: website-crawler$/name: web-crawler/' "$SKILL_DIR/SKILL.md"
 
 # Copy Rust code into scripts/ subdirectory
 cp -r "$SOURCE_SKILL/src" "$SKILL_DIR/scripts/"
