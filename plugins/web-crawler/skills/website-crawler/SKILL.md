@@ -73,19 +73,24 @@ Use this skill when the user requests:
 ### Build from Source
 
 ```bash
-# Clone the repository
-git clone https://github.com/leobrival/rcrawler.git
-cd rcrawler
+# Navigate to the skill source directory (in plugin cache or local dev)
+cd skills/website-crawler
 
-# Build release binary
-cargo build --release
+# Build the binary
+./scripts/build.sh
 
-# Copy to skill directory
-cp target/release/rcrawler ~/.claude/skills/web-crawler/bin/
+# Install to Claude skills directory
+./scripts/install.sh
 ```
 
 Build time: ~2 minutes
 Binary size: 5.4 MB
+
+### Scripts Available
+
+- `./scripts/build.sh` - Compile the Rust binary
+- `./scripts/install.sh` - Install binary to `~/.claude/skills/web-crawler/bin/`
+- `./scripts/uninstall.sh` - Remove installed binary
 
 ## Command Line Interface
 
@@ -362,8 +367,10 @@ When crawl completes, inform user:
 # Check if binary exists
 ls ~/.claude/skills/web-crawler/bin/rcrawler
 
-# If missing, build it
-cd ~/.claude/skills/web-crawler/scripts && cargo build --release
+# If missing, build and install it from the skill source
+cd skills/website-crawler
+./scripts/build.sh
+./scripts/install.sh
 ```
 
 ### Crawl Failures
