@@ -12,6 +12,9 @@ SOURCE_REPO="https://github.com/leobrival/rcrawler.git"
 
 echo "Syncing web-crawler from $SOURCE_REPO..."
 
+# Create plugin directory if it doesn't exist
+mkdir -p "$PLUGIN_DIR"
+
 # Clone the source repo
 git clone --depth 1 "$SOURCE_REPO" "$TEMP_DIR/rcrawler"
 
