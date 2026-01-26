@@ -1,5 +1,4 @@
 {
-	"$schema": "../../../schemas/plugin.schema.json",
 	"name": "product",
 	"version": "1.0.0",
 	"description": "Product design and management tools for building user-centric products",

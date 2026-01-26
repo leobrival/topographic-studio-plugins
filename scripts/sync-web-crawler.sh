@@ -26,16 +26,6 @@ echo "Syncing .claude-plugin..."
 rm -rf "$PLUGIN_DIR/.claude-plugin"
 cp -r "$TEMP_DIR/rcrawler/.claude-plugin" "$PLUGIN_DIR/"
 
-# Add local schema reference to plugin.json
-PLUGIN_JSON="$PLUGIN_DIR/.claude-plugin/plugin.json"
-if [ -f "$PLUGIN_JSON" ]; then
-  # Check if $schema already exists
-  if ! grep -q '"\$schema"' "$PLUGIN_JSON"; then
-    # Add $schema as first property after opening brace
-    sed -i '' 's/^{$/{\n  "\$schema": "..\/..\/..\/schemas\/plugin.schema.json",/' "$PLUGIN_JSON"
-  fi
-fi
-
 # Sync skills/website-crawler with reorganized structure
 echo "Syncing skills/website-crawler..."
 rm -rf "$SKILL_DIR"

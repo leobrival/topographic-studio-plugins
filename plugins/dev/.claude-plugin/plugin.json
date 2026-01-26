@@ -1,5 +1,4 @@
 {
-	"$schema": "../../../schemas/plugin.schema.json",
 	"name": "dev",
 	"version": "1.0.0",
 	"description": "Development CLI skills and GitHub workflows - Docker, Vercel, Railway, Neon, deployment platforms, and automated Git/GitHub workflows. Use for deployment, containerization, database management, infrastructure operations, and collaborative development.",
