@@ -1,0 +1,183 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://claude-plugins.local/schemas/marketplace.schema.json",
+  "title": "Claude Code Marketplace",
+  "description": "Schema for Claude Code plugin marketplace configuration",
+  "type": "object",
+  "required": ["name", "plugins"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique marketplace identifier (kebab-case)"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?$",
+      "description": "Semantic version (e.g., 1.0.0, 2.1.0-beta.1)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the marketplace"
+    },
+    "owner": {
+      "$ref": "#/definitions/author",
+      "description": "Marketplace owner information"
+    },
+    "plugins": {
+      "type": "array",
+      "description": "List of plugins in this marketplace",
+      "items": {
+        "$ref": "#/definitions/pluginEntry"
+      },
+      "minItems": 1
+    }
+  },
+  "definitions": {
+    "author": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Author name"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Author email"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Author website URL"
+        }
+      },
+      "additionalProperties": false
+    },
+    "pluginEntry": {
+      "type": "object",
+      "required": ["name", "source"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "Plugin identifier (kebab-case)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief description of plugin functionality"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?$",
+          "description": "Semantic version"
+        },
+        "author": {
+          "$ref": "#/definitions/author"
+        },
+        "source": {
+          "type": "string",
+          "pattern": "^\\./",
+          "description": "Relative path to plugin directory (must start with ./)"
+        },
+        "category": {
+          "type": "string",
+          "description": "Plugin category for organization"
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Searchable tags"
+        },
+        "homepage": {
+          "type": "string",
+          "format": "uri",
+          "description": "Documentation URL"
+        },
+        "repository": {
+          "type": "string",
+          "format": "uri",
+          "description": "Source code URL"
+        },
+        "license": {
+          "type": "string",
+          "description": "License identifier (MIT, Apache-2.0, etc.)"
+        },
+        "strict": {
+          "type": "boolean",
+          "description": "If true, use only marketplace entry; ignore plugin.json components"
+        },
+        "commands": {
+          "$ref": "#/definitions/pathOrPaths",
+          "description": "Command file paths"
+        },
+        "agents": {
+          "$ref": "#/definitions/pathOrPaths",
+          "description": "Agent file paths"
+        },
+        "skills": {
+          "$ref": "#/definitions/pathOrPaths",
+          "description": "Skill directory paths"
+        },
+        "hooks": {
+          "oneOf": [
+            { "type": "string", "pattern": "^\\./" },
+            { "$ref": "#/definitions/hooksConfig" }
+          ],
+          "description": "Hooks config path or inline config"
+        },
+        "mcpServers": {
+          "oneOf": [
+            { "type": "string", "pattern": "^\\./" },
+            { "type": "object" }
+          ],
+          "description": "MCP servers config path or inline config"
+        },
+        "lspServers": {
+          "oneOf": [
+            { "type": "string", "pattern": "^\\./" },
+            { "type": "object" }
+          ],
+          "description": "LSP servers config path or inline config"
+        }
+      },
+      "additionalProperties": false
+    },
+    "pathOrPaths": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^\\./",
+          "description": "Relative path (must start with ./)"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\./"
+          },
+          "description": "Array of relative paths"
+        }
+      ]
+    },
+    "hooksConfig": {
+      "type": "object",
+      "properties": {
+        "hooks": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "$schema": "../schemas/marketplace.schema.json",
   "name": "topographic-plugins-official",
   "version": "1.0.0",
   "description": "Official Topographic plugins for Claude Code - development CLI, GitHub workflows, and product design",
