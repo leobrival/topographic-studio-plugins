@@ -1,6 +1,7 @@
 ---
 name: convex-cli
 description: Convex CLI expert for serverless backend and real-time database. Use when users need to deploy functions, manage environments, or import/export data.
+allowed-tools: Bash(npx convex:*), Bash(bunx convex:*)
 ---
 
 # Convex CLI Guide

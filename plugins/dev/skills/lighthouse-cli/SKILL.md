@@ -1,6 +1,8 @@
 ---
 name: lighthouse-cli
 description: Lighthouse CLI expert for web performance auditing. Use when users need to audit performance, accessibility, SEO, best practices, or generate audit reports.
+argument-hint: [URL]
+allowed-tools: Bash(lighthouse:*), Bash(npx lighthouse:*)
 ---
 
 # Lighthouse CLI Guide

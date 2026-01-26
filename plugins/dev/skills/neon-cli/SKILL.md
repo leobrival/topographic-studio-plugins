@@ -1,6 +1,7 @@
 ---
 name: neon-cli
 description: Neon CLI expert for serverless PostgreSQL. Use when users need to manage Neon projects, branches, databases, roles, or connection strings.
+allowed-tools: Bash(neon:*), Bash(psql:*)
 ---
 
 # Neon CLI Guide

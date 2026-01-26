@@ -1,6 +1,7 @@
 ---
 name: vercel-cli
 description: Vercel CLI expert for serverless deployment. Use when users need to deploy apps, manage domains, env vars, or Vercel projects.
+allowed-tools: Bash(vercel:*)
 ---
 
 # Vercel CLI Guide

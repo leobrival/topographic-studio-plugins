@@ -1,8 +1,6 @@
 ---
 name: user-personas
 description: Expert in creating detailed customer persona cards with motivations, Jobs-to-be-Done framework, Forces of Progress, Customer Awareness Stages, 30 Elements of Value, behavioral insights, empathy mapping, and The Mom Test validation principles. Creates actionable personas based on real behavioral data.
-version: 1.0.0
-license: MIT
 allowed-tools: Read, Write, Edit, Grep, Glob, WebFetch, WebSearch
 ---
 

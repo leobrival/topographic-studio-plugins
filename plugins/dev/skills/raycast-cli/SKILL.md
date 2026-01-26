@@ -1,6 +1,7 @@
 ---
 name: raycast-cli
 description: Raycast CLI expert for extension development. Use when users need to create, develop, test, or publish Raycast extensions.
+allowed-tools: Bash(npx ray:*), Bash(npm run:*)
 ---
 
 # Raycast CLI Guide

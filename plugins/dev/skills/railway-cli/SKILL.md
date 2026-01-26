@@ -1,6 +1,7 @@
 ---
 name: railway-cli
 description: Railway CLI expert for deployment. Use when users need to deploy apps, manage databases, configure Railway projects, or manage environments.
+allowed-tools: Bash(railway:*)
 ---
 
 # Railway CLI Guide

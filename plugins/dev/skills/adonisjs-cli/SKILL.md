@@ -1,6 +1,7 @@
 ---
 name: adonisjs-cli
 description: AdonisJS Ace CLI expert for building TypeScript backend applications. Use when users need to scaffold, develop, build, or manage AdonisJS projects, run migrations, create models/controllers, or configure packages.
+allowed-tools: Bash(node ace:*), Bash(npm run:*)
 ---
 
 # AdonisJS Ace CLI Guide

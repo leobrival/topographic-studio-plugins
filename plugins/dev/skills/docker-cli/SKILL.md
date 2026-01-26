@@ -1,6 +1,7 @@
 ---
 name: docker-cli
 description: Docker CLI expert for containerization. Use when users need to build, run, manage containers, images, networks, volumes, or compose applications.
+allowed-tools: Bash(docker:*), Bash(docker-compose:*)
 ---
 
 # Docker CLI Guide

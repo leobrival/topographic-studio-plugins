@@ -1,8 +1,6 @@
 ---
 name: spec-kit
 description: Specification-Driven Development methodology from GitHub spec-kit. Use when users ask to create specifications, plan features, define requirements, write user stories, decompose tasks, establish project constitution, or follow SDD workflow.
-version: 1.0.0
-license: MIT
 allowed-tools: Read, Write, Grep, Glob
 ---
 

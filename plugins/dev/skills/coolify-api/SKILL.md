@@ -1,6 +1,7 @@
 ---
 name: coolify-api
 description: Coolify API expert for self-hosted PaaS management. Use when users need to deploy apps, manage databases, or configure servers on Coolify.
+allowed-tools: Bash(curl:*), WebFetch
 ---
 
 # Coolify API Guide
