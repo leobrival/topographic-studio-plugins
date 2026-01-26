@@ -7,7 +7,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(dirname "$SCRIPT_DIR")"
 PLUGIN_DIR="$REPO_ROOT/plugins/web-crawler"
-SKILL_DIR="$PLUGIN_DIR/skills/website-crawler"
+SKILL_DIR="$PLUGIN_DIR/skills/web-crawler"
 TEMP_DIR=$(mktemp -d)
 SOURCE_REPO="https://github.com/leobrival/rcrawler.git"
 
@@ -26,13 +26,16 @@ echo "Syncing .claude-plugin..."
 rm -rf "$PLUGIN_DIR/.claude-plugin"
 cp -r "$TEMP_DIR/rcrawler/.claude-plugin" "$PLUGIN_DIR/"
 
-# Sync skills/website-crawler with reorganized structure
-echo "Syncing skills/website-crawler..."
+# Sync skills/web-crawler with reorganized structure
+echo "Syncing skills/web-crawler..."
 rm -rf "$SKILL_DIR"
 mkdir -p "$SKILL_DIR/scripts"
 
 # Copy SKILL.md to skill root
 cp "$SOURCE_SKILL/SKILL.md" "$SKILL_DIR/"
+
+# Note: Source repo uses "web-crawler" in frontmatter which matches our directory name
+# No sed fix needed since names are now aligned
 
 # Copy Rust code into scripts/ subdirectory
 cp -r "$SOURCE_SKILL/src" "$SKILL_DIR/scripts/"
@@ -57,12 +60,13 @@ rm -rf "$TEMP_DIR"
 echo "Sync complete!"
 echo ""
 echo "Structure created:"
-echo "  $SKILL_DIR/"
-echo "  ├── SKILL.md"
-echo "  └── scripts/"
-echo "      ├── Cargo.toml"
-echo "      ├── src/"
-echo "      └── templates/"
+echo "  plugins/web-crawler/"
+echo "  └── skills/web-crawler/"
+echo "      ├── SKILL.md"
+echo "      └── scripts/"
+echo "          ├── Cargo.toml"
+echo "          ├── src/"
+echo "          └── templates/"
 echo ""
 echo "Don't forget to commit the changes:"
 echo "  git add plugins/web-crawler"
