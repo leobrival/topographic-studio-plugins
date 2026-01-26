@@ -1,0 +1,82 @@
+[package]
+name = "rcrawler"
+version = "0.1.0"
+edition = "2021"
+authors = ["Leo Brival"]
+description = "High-performance web crawler in Rust"
+license = "MIT"
+keywords = ["crawler", "scraper", "web-crawler", "html-to-markdown", "ai-agents"]
+
+[dependencies]
+# Async runtime - multi-threaded
+tokio = { version = "1", features = ["full"] }
+
+# HTTP client - connection pooling + streaming
+reqwest = { version = "0.12", features = ["gzip", "brotli", "stream"] }
+
+# HTML parsing - streaming avec lol_html (2x faster que scraper)
+lol_html = "2.0"
+scraper = "0.22"  # Fallback pour queries complexes
+
+# XML parsing (sitemap)
+quick-xml = { version = "0.37", features = ["serialize"] }
+
+# CLI
+clap = { version = "4", features = ["derive"] }
+
+# Sérialisation
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Rate limiting - multi-quota support
+governor = "0.8"
+
+# URL manipulation
+url = "2"
+
+# Regex - compiled patterns
+regex = "1"
+
+# Logging structuré
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["json", "env-filter"] }
+
+# Concurrency primitives
+dashmap = "6"
+parking_lot = "0.12"
+
+# Error handling
+thiserror = "2"
+anyhow = "1"
+
+# Time
+chrono = { version = "0.4", features = ["serde"] }
+
+# Progress bar + streaming output
+indicatif = "0.17"
+
+# Robots.txt
+robotstxt = "0.3"
+
+# Markdown conversion (LLM-ready output)
+html2md = "0.2"
+
+# Random number generation (for stealth mode)
+rand = "0.8"
+
+# Connection pooling
+hyper = { version = "1", features = ["client", "http1", "http2"] }
+hyper-util = "0.1"
+
+# Home directory access
+dirs = "5"
+
+[[bin]]
+name = "rcrawler"
+path = "src/main.rs"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true
+opt-level = 3

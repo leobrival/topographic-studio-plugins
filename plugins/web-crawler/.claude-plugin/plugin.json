@@ -1,0 +1,11 @@
+{
+  "name": "web-crawler",
+  "version": "1.0.0",
+  "description": "High-performance Rust web crawler with stealth mode, LLM-ready Markdown export, multi-format output, sitemap discovery, and robots.txt support. Optimized for content extraction, site mapping, and LLM/RAG pipelines.",
+  "skills": ["./skills/website-crawler/SKILL.md"],
+  "author": {
+    "name": "Leo Brival",
+    "email": "leo.brival@gmail.com"
+  },
+  "license": "MIT"
+}
